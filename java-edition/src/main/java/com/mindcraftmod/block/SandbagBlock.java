@@ -28,6 +28,13 @@ public class SandbagBlock extends Block implements Waterloggable {
     public static final IntProperty LAYERS =
             IntProperty.of("layers", 1, 8);
 
+    /**
+     * Height in pixels (out of 16) for each layer index 0-8.
+     * Index 0 unused; index 8 = 16px (full block).
+     * Exposed package-visible for unit tests in SandbagBlockLogicTest.
+     */
+    static final int[] LAYER_HEIGHT_PX = { 0, 2, 4, 6, 8, 10, 12, 14, 16 };
+
     /** Height in pixels (out of 16) per layer count. */
     private static final VoxelShape[] LAYER_TO_SHAPE = new VoxelShape[]{
             VoxelShapes.empty(),                                   // 0 (unused)

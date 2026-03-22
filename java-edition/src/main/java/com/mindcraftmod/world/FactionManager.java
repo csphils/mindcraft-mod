@@ -90,6 +90,14 @@ public class FactionManager extends PersistentState {
 
     // ── Factory ─────────────────────────────────────────────────────────────
 
+    /**
+     * Package-visible entry point for unit tests — avoids needing a MinecraftServer.
+     * Do NOT call from mod code; use {@link #get(MinecraftServer)} instead.
+     */
+    static FactionManager fromNbtForTest(NbtCompound nbt) {
+        return fromNbt(nbt);
+    }
+
     public static FactionManager get(MinecraftServer server) {
         PersistentStateManager psm = server
                 .getWorld(net.minecraft.world.World.OVERWORLD)
