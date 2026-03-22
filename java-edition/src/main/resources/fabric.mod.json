@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "mindcraftmod",
+  "version": "${version}",
+  "name": "Mindcraft Mod — WW1 Warfare",
+  "description": "A WW1-themed Minecraft mod featuring trench warfare, artillery, gas attacks, cavalry, and multiplayer faction battles.",
+  "authors": ["csphils"],
+  "contact": {
+    "sources": "https://github.com/csphils/mindcraft-mod"
+  },
+  "license": "MIT",
+  "icon": "assets/mindcraftmod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.mindcraftmod.MindcraftMod"],
+    "client": ["com.mindcraftmod.client.MindcraftModClient"]
+  },
+  "mixins": ["mindcraftmod.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "fabric-api": "*",
+    "minecraft": "~1.21.4",
+    "java": ">=21"
+  }
+}

@@ -1,0 +1,42 @@
+## Mindcraft Mod — WW1 Warfare
+## Resource Pack Language File (en_US)
+
+## Blocks
+tile.mindcraft:barbed_wire.name=Barbed Wire
+tile.mindcraft:gas_cloud.name=Gas Cloud
+tile.mindcraft:smoke_screen.name=Smoke Screen
+tile.mindcraft:mud_pit.name=Mud Pit
+tile.mindcraft:sandbag.name=Sandbag
+tile.mindcraft:trench_wall.name=Trench Wall
+tile.mindcraft:artillery_platform.name=Artillery Platform
+tile.mindcraft:field_telephone.name=Field Telephone
+tile.mindcraft:supply_crate.name=Supply Crate
+tile.mindcraft:shell_crater.name=Shell Crater
+tile.mindcraft:barbed_wire_post.name=Barbed Wire Post
+tile.mindcraft:rusted_iron_bars.name=Rusted Iron Bars
+tile.mindcraft:flag_block.name=Flag
+
+## Items
+item.mindcraft:bolt_action_rifle.name=Bolt-Action Rifle
+item.mindcraft:trench_bayonet.name=Trench Bayonet
+item.mindcraft:grenade.name=Grenade
+item.mindcraft:gas_mask.name=Gas Mask
+item.mindcraft:trench_coat.name=Trench Coat
+item.mindcraft:horse_armor_plate.name=Horse Armor Plate
+item.mindcraft:field_rations.name=Field Rations
+item.mindcraft:signal_flare_red.name=Signal Flare (Red)
+item.mindcraft:signal_flare_green.name=Signal Flare (Green)
+item.mindcraft:signal_flare_gray.name=Signal Flare (Gray)
+item.mindcraft:rifle_cartridge.name=Rifle Cartridge
+item.mindcraft:gas_canister.name=Gas Canister
+item.mindcraft:mud_ball.name=Mud Ball
+item.mindcraft:leather_scrap.name=Leather Scrap
+
+## Entities
+entity.mindcraft:war_horse.name=War Horse
+entity.mindcraft:carrier_pigeon.name=Carrier Pigeon
+entity.mindcraft:trench_rat.name=Trench Rat
+entity.mindcraft:guard_dog.name=Guard Dog
+entity.mindcraft:trench_soldier.name=Trench Soldier
+entity.mindcraft:sniper.name=Sniper
+entity.mindcraft:gas_grenadier.name=Gas Grenadier

@@ -1,0 +1,35 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Mindcraft Mod — WW1 Warfare (Behavior Pack)",
+    "description": "WW1-themed Minecraft add-on: trench warfare, artillery, gas attacks, cavalry, and faction battles. Behavior pack.",
+    "uuid": "dac381ac-8a3f-4653-8d38-459c872becf7",
+    "version": [0, 1, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "d547a7ac-5e6d-4335-9e1e-123b4908bf19",
+      "version": [0, 1, 0]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "722c3f45-c70e-4551-996d-6a6e53235292",
+      "version": [0, 1, 0],
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "1.15.0"
+    },
+    {
+      "uuid": "fc3f1d64-d8b6-490f-bab5-a342bc3a98fd",
+      "version": [0, 1, 0]
+    }
+  ],
+  "capabilities": ["script_eval"]
+}
