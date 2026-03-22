@@ -86,6 +86,32 @@ public class ModEntities {
                             .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
                             .build());
 
+    // ── Phase-3 throwables ───────────────────────────────────────────────────
+
+    public static final EntityType<GrenadeEntity> GRENADE =
+            Registry.register(Registries.ENTITY_TYPE,
+                    Identifier.of(MindcraftMod.MOD_ID, "grenade"),
+                    FabricEntityTypeBuilder.<GrenadeEntity>create(SpawnGroup.MISC,
+                                    GrenadeEntity::new)
+                            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                            .build());
+
+    public static final EntityType<SignalFlareProjectile> SIGNAL_FLARE_PROJECTILE =
+            Registry.register(Registries.ENTITY_TYPE,
+                    Identifier.of(MindcraftMod.MOD_ID, "signal_flare_projectile"),
+                    FabricEntityTypeBuilder.<SignalFlareProjectile>create(SpawnGroup.MISC,
+                                    SignalFlareProjectile::new)
+                            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                            .build());
+
+    public static final EntityType<MudBallProjectile> MUD_BALL_PROJECTILE =
+            Registry.register(Registries.ENTITY_TYPE,
+                    Identifier.of(MindcraftMod.MOD_ID, "mud_ball_projectile"),
+                    FabricEntityTypeBuilder.<MudBallProjectile>create(SpawnGroup.MISC,
+                                    MudBallProjectile::new)
+                            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                            .build());
+
     public static void register() {
         // All registration happens in field initializers above.
         // This method exists so MindcraftMod.java can trigger class loading.

@@ -1,8 +1,10 @@
 package com.mindcraftmod.block;
 
+import com.mindcraftmod.item.TrenchCoatItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -33,9 +35,13 @@ public class MudPitBlock extends Block {
         if (world.isClient) return;
         if (!(entity instanceof LivingEntity living)) return;
 
-        // Slowness II — refreshed each tick while standing on mud
+        // Trench Coat reduces Mud Pit slowness from II → I
+        boolean wearingTrenchCoat = !living.getEquippedStack(EquipmentSlot.CHEST).isEmpty()
+                && living.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof TrenchCoatItem;
+        int slownessLevel = wearingTrenchCoat ? 0 : 1; // 0 = Slowness I, 1 = Slowness II
+
         living.addStatusEffect(new StatusEffectInstance(
-                StatusEffects.SLOWNESS, 40, 1, false, false));
+                StatusEffects.SLOWNESS, 40, slownessLevel, false, false));
 
         // Cap upward velocity to simulate reduced jump height
         Vec3d vel = entity.getVelocity();

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "G",
+    "D",
+    "I"
+  ],
+  "key": {
+    "G": { "item": "minecraft:gunpowder" },
+    "D": { "item": "minecraft:gray_dye" },
+    "I": { "item": "minecraft:iron_ingot" }
+  },
+  "result": {
+    "id": "mindcraftmod:signal_flare_gray",
+    "count": 2
+  }
+}
