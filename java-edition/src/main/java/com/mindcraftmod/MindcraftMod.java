@@ -8,11 +8,16 @@ import com.mindcraftmod.item.ModItems;
 import com.mindcraftmod.item.ModItemGroups;
 import com.mindcraftmod.structure.ModStructurePieceTypes;
 import com.mindcraftmod.structure.ModStructures;
+import com.mindcraftmod.network.FactionSyncPayload;
 import com.mindcraftmod.world.FactionCommand;
+import com.mindcraftmod.world.FactionManager;
 import com.mindcraftmod.world.ModWorldGen;
 import com.mindcraftmod.world.TerritoryManager;
 import com.mindcraftmod.world.WorldEventScheduler;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +51,14 @@ public class MindcraftMod implements ModInitializer {
         FactionCommand.register();
         WorldEventScheduler.register();
         TerritoryManager.register();
+
+        // Networking — S→C faction sync packet
+        PayloadTypeRegistry.playS2C().register(FactionSyncPayload.ID, FactionSyncPayload.CODEC);
+        ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+            String factionName = FactionManager.get(server)
+                    .getFaction(handler.player.getUuid()).name();
+            ServerPlayNetworking.send(handler.player, new FactionSyncPayload(factionName));
+        });
 
         LOGGER.info("Mindcraft Mod initialized.");
     }

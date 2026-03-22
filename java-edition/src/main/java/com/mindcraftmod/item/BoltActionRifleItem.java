@@ -2,6 +2,7 @@ package com.mindcraftmod.item;
 
 import com.mindcraftmod.entity.ModEntities;
 import com.mindcraftmod.entity.TrenchRifleProjectile;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -66,7 +67,7 @@ public class BoltActionRifleItem extends Item {
                 SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 0.8f, 1.8f);
 
         // Damage the rifle
-        stack.damage(1, player, LivingEntityEquipmentSlot(hand));
+        stack.damage(1, player, hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
 
         // Apply 1-second cooldown before next shot
         player.getItemCooldownManager().set(this, COOLDOWN_TICKS);

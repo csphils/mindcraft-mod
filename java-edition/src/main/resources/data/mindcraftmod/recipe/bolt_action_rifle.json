@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  P",
+    "III",
+    " S "
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "S": { "item": "minecraft:stick" },
+    "P": { "item": "minecraft:glass_pane" }
+  },
+  "result": {
+    "id": "mindcraftmod:bolt_action_rifle",
+    "count": 1
+  }
+}

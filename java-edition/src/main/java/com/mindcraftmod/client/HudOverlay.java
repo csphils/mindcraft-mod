@@ -1,6 +1,5 @@
 package com.mindcraftmod.client;
 
-import com.mindcraftmod.world.FactionManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -22,10 +21,28 @@ import net.minecraft.text.Text;
 @Environment(EnvType.CLIENT)
 public class HudOverlay {
 
-    /** Faction for the local player — updated by FactionClientState. */
-    public static String currentFactionName = "No faction";
-    /** ARGB colour to render the faction name in. */
-    public static int    currentFactionColor = 0xFFAAAAAA;
+    /** Faction display name — updated via {@link #setFaction(String)} from the network handler. */
+    private static String currentFactionName  = "No faction";
+    /** ARGB colour — cornflower blue (Allies), imperial red (Central), neutral gray (None). */
+    private static int    currentFactionColor = 0xFFAAAAAA;
+
+    /**
+     * Called by the S→C networking handler whenever the player's faction changes.
+     * Safe to call from any thread; the render loop reads these fields on the render thread
+     * without locking (values are primitives / immutable Strings — benign data race).
+     */
+    public static void setFaction(String factionEnumName) {
+        currentFactionName = switch (factionEnumName) {
+            case "ALLIES"         -> "Allies";
+            case "CENTRAL_POWERS" -> "Central Powers";
+            default               -> "No faction";
+        };
+        currentFactionColor = switch (factionEnumName) {
+            case "ALLIES"         -> 0xFF4488FF;  // cornflower blue
+            case "CENTRAL_POWERS" -> 0xFFCC3333;  // imperial red
+            default               -> 0xFFAAAAAA;  // neutral gray
+        };
+    }
 
     public static void register() {
         HudRenderCallback.EVENT.register(HudOverlay::onHudRender);

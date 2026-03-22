@@ -1,15 +1,16 @@
 package com.mindcraftmod.world;
 
+import com.mindcraftmod.network.FactionSyncPayload;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Registers the /faction command tree.
@@ -67,6 +68,7 @@ public class FactionCommand {
         }
 
         factions.setFaction(player.getUuid(), chosen);
+        ServerPlayNetworking.send(player, new FactionSyncPayload(chosen.name()));
         source.getServer().getPlayerManager().broadcast(
                 Text.literal(player.getName().getString()
                         + " has joined the " + chosen.displayName() + "!"), false);
@@ -79,6 +81,7 @@ public class FactionCommand {
 
         FactionManager factions = FactionManager.get(source.getServer());
         factions.setFaction(player.getUuid(), FactionManager.Faction.NONE);
+        ServerPlayNetworking.send(player, new FactionSyncPayload("NONE"));
         player.sendMessage(Text.literal("You have left your faction."), false);
         return 1;
     }
