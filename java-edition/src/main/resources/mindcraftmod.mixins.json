@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.mindcraftmod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [],
+  "client": [
+    "MixinGameRenderer"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

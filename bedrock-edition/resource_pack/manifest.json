@@ -1,0 +1,17 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Mindcraft Mod — WW1 Warfare (Resource Pack)",
+    "description": "WW1-themed Minecraft add-on: trench warfare, artillery, gas attacks, cavalry, and faction battles. Resource pack — textures, models, sounds.",
+    "uuid": "fc3f1d64-d8b6-490f-bab5-a342bc3a98fd",
+    "version": [0, 1, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "b5e9c1d3-2f4a-4a6c-8e7b-1d2c3e4f5a6b",
+      "version": [0, 1, 0]
+    }
+  ]
+}

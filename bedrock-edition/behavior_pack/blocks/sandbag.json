@@ -1,0 +1,45 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:block": {
+    "description": {
+      "identifier": "mindcraft:sandbag",
+      "menu_category": {
+        "category": "construction"
+      },
+      "properties": {
+        "mindcraft:layers": [1, 2, 3, 4, 5, 6, 7, 8]
+      }
+    },
+    "permutations": [
+      {
+        "condition": "query.block_property('mindcraft:layers') == 1",
+        "components": {
+          "minecraft:collision_box": { "enabled": true, "origin": [-8, 0, -8], "size": [16, 2, 16] },
+          "minecraft:selection_box": { "enabled": true, "origin": [-8, 0, -8], "size": [16, 2, 16] }
+        }
+      },
+      {
+        "condition": "query.block_property('mindcraft:layers') == 2",
+        "components": {
+          "minecraft:collision_box": { "enabled": true, "origin": [-8, 0, -8], "size": [16, 4, 16] },
+          "minecraft:selection_box": { "enabled": true, "origin": [-8, 0, -8], "size": [16, 4, 16] }
+        }
+      },
+      {
+        "condition": "query.block_property('mindcraft:layers') >= 8",
+        "components": {
+          "minecraft:collision_box": { "enabled": true, "origin": [-8, 0, -8], "size": [16, 16, 16] },
+          "minecraft:selection_box": { "enabled": true, "origin": [-8, 0, -8], "size": [16, 16, 16] }
+        }
+      }
+    ],
+    "components": {
+      "minecraft:geometry": { "identifier": "geometry.sandbag" },
+      "minecraft:material_instances": {
+        "*": { "texture": "sandbag", "render_method": "opaque" }
+      },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.5 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 6 }
+    }
+  }
+}
