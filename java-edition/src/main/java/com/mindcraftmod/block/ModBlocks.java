@@ -28,23 +28,24 @@ public class ModBlocks {
                     .nonOpaque()
     );
 
-    /** Gas cloud — full-block space, non-solid, applies Poison II. */
+    /** Gas cloud — full-block space, non-solid, applies Poison II. Spreads via random tick. */
     public static final Block GAS_CLOUD = new GasCloudBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.YELLOW)
                     .noCollision()
                     .nonOpaque()
                     .noBlockBreakParticles()
-                    .air()  // treated as air-like for lighting purposes
+                    .ticksRandomly()
     );
 
-    /** Smoke screen — non-solid, applies Blindness. */
+    /** Smoke screen — non-solid, applies Blindness. Dissipates via random tick. */
     public static final Block SMOKE_SCREEN = new SmokeScreenBlock(
             AbstractBlock.Settings.create()
                     .mapColor(MapColor.GRAY)
                     .noCollision()
                     .nonOpaque()
                     .noBlockBreakParticles()
+                    .ticksRandomly()
     );
 
     /** Mud pit — solid, applies slowness like Soul Sand. */

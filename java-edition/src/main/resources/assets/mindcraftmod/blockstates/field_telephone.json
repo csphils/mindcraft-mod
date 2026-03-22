@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "mindcraftmod:block/field_telephone",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "mindcraftmod:block/field_telephone",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "mindcraftmod:block/field_telephone",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mindcraftmod:block/field_telephone",
+      "y": 270
+    }
+  }
+}

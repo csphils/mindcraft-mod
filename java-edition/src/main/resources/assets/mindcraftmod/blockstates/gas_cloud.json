@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "mindcraftmod:block/gas_cloud" }
+  }
+}
