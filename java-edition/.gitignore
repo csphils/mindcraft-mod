@@ -1,0 +1,25 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# Fabric Loom generated files
+.loom/
+remappedSources/
+minecraft-sources/
+
+# OS
+.DS_Store
+Thumbs.db
