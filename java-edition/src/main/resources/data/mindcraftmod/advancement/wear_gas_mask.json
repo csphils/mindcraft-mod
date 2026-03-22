@@ -1,0 +1,18 @@
+{
+  "display": {
+    "icon": { "id": "mindcraftmod:gas_mask" },
+    "title": { "translate": "advancements.mindcraftmod.wear_gas_mask.title", "fallback": "No More Coughing" },
+    "description": { "translate": "advancements.mindcraftmod.wear_gas_mask.description", "fallback": "Equip a Gas Mask" },
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "mindcraftmod:root",
+  "criteria": {
+    "has_gas_mask": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{ "items": "mindcraftmod:gas_mask" }]
+      }
+    }
+  }
+}

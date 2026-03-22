@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:gas_canister",
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 1, "max": 3 } }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:gas_mask",
+          "weight": 20
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 80
+        }
+      ]
+    }
+  ]
+}

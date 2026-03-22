@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:bolt_action_rifle"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:rifle_cartridge",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "min": 8, "max": 16 }
+            },
+            { "function": "minecraft:looting_enchant", "count": { "min": 0, "max": 4 } }
+          ]
+        }
+      ]
+    }
+  ]
+}

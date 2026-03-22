@@ -1,0 +1,7 @@
+{
+  "type": "mindcraftmod:field_hospital",
+  "biomes": "#mindcraftmod:has_structure/field_hospital",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

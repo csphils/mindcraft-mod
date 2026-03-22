@@ -1,0 +1,16 @@
+{
+  "display": {
+    "icon": { "id": "mindcraftmod:bolt_action_rifle" },
+    "title": { "translate": "advancements.mindcraftmod.root.title", "fallback": "Into the Trenches" },
+    "description": { "translate": "advancements.mindcraftmod.root.description", "fallback": "Join the Great War" },
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

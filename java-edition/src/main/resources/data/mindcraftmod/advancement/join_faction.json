@@ -1,0 +1,18 @@
+{
+  "display": {
+    "icon": { "id": "minecraft:iron_chestplate" },
+    "title": { "translate": "advancements.mindcraftmod.join_faction.title", "fallback": "Choose Your Side" },
+    "description": { "translate": "advancements.mindcraftmod.join_faction.description", "fallback": "Join a faction with /faction join" },
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "mindcraftmod:root",
+  "criteria": {
+    "join_faction": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": []
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": { "id": "minecraft:tnt" },
+    "title": { "translate": "advancements.mindcraftmod.survive_barrage.title", "fallback": "Shell Shocked" },
+    "description": { "translate": "advancements.mindcraftmod.survive_barrage.description", "fallback": "Survive an artillery barrage" },
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "parent": "mindcraftmod:root",
+  "criteria": {
+    "low_health": {
+      "trigger": "minecraft:entity_hurt_player",
+      "conditions": {
+        "damage": {
+          "source_entity": { "type": "minecraft:player" }
+        }
+      }
+    }
+  }
+}

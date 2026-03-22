@@ -13,7 +13,6 @@ public class MindcraftModClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Entity renderer registration added in Phase 4
-        // HUD overlay registration added in Phase 7
+        HudOverlay.register();
     }
 }

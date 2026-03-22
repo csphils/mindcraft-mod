@@ -1,0 +1,18 @@
+{
+  "display": {
+    "icon": { "id": "mindcraftmod:bolt_action_rifle" },
+    "title": { "translate": "advancements.mindcraftmod.craft_rifle.title", "fallback": "Armed and Ready" },
+    "description": { "translate": "advancements.mindcraftmod.craft_rifle.description", "fallback": "Obtain a Bolt-Action Rifle" },
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "mindcraftmod:root",
+  "criteria": {
+    "has_rifle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{ "items": "mindcraftmod:bolt_action_rifle" }]
+      }
+    }
+  }
+}

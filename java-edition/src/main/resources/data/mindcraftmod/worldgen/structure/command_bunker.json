@@ -1,0 +1,7 @@
+{
+  "type": "mindcraftmod:command_bunker",
+  "biomes": "#mindcraftmod:has_structure/command_bunker",
+  "step": "underground_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}
