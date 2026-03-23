@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.MapColor;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
@@ -14,6 +16,9 @@ import net.minecraft.util.Identifier;
  *
  * Pattern: declare public static final fields here, register them in register().
  * Block items are registered in ModItems.java after this runs.
+ *
+ * NOTE: In 1.21.4 AbstractBlock.<init> calls settings.getLootTableKey() immediately,
+ * so every Settings object must have registryKey() set before instantiation.
  */
 public class ModBlocks {
 
@@ -21,6 +26,7 @@ public class ModBlocks {
     /** Barbed wire — carpet-style, no collision, slows and damages players. */
     public static final Block BARBED_WIRE = new BarbedWireBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("barbed_wire"))
                     .mapColor(MapColor.IRON_GRAY)
                     .sounds(BlockSoundGroup.METAL)
                     .noCollision()
@@ -31,6 +37,7 @@ public class ModBlocks {
     /** Gas cloud — full-block space, non-solid, applies Poison II. Spreads via random tick. */
     public static final Block GAS_CLOUD = new GasCloudBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("gas_cloud"))
                     .mapColor(MapColor.YELLOW)
                     .noCollision()
                     .nonOpaque()
@@ -41,6 +48,7 @@ public class ModBlocks {
     /** Smoke screen — non-solid, applies Blindness. Dissipates via random tick. */
     public static final Block SMOKE_SCREEN = new SmokeScreenBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("smoke_screen"))
                     .mapColor(MapColor.GRAY)
                     .noCollision()
                     .nonOpaque()
@@ -51,6 +59,7 @@ public class ModBlocks {
     /** Mud pit — solid, applies slowness like Soul Sand. */
     public static final Block MUD_PIT = new MudPitBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("mud_pit"))
                     .mapColor(MapColor.BROWN)
                     .sounds(BlockSoundGroup.MUD)
                     .strength(0.5f)
@@ -60,6 +69,7 @@ public class ModBlocks {
     /** Stackable sandbag layers (1-8), blast-absorbing fortification. */
     public static final Block SANDBAG = new SandbagBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("sandbag"))
                     .mapColor(MapColor.PALE_YELLOW)
                     .sounds(BlockSoundGroup.SAND)
                     .strength(1.0f, 6.0f)
@@ -68,6 +78,7 @@ public class ModBlocks {
     /** Directional trench wall — connects like fence, dirt+timber look. */
     public static final Block TRENCH_WALL = new TrenchWallBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("trench_wall"))
                     .mapColor(MapColor.DIRT_BROWN)
                     .sounds(BlockSoundGroup.WOOD)
                     .strength(1.5f, 3.0f)
@@ -76,6 +87,7 @@ public class ModBlocks {
     /** 3x3 raised stone slab — required base for placing Cannon entity. */
     public static final Block ARTILLERY_PLATFORM = new Block(
             AbstractBlock.Settings.create()
+                    .registryKey(key("artillery_platform"))
                     .mapColor(MapColor.STONE_GRAY)
                     .sounds(BlockSoundGroup.STONE)
                     .strength(3.0f, 10.0f)
@@ -84,6 +96,7 @@ public class ModBlocks {
     /** Sends faction-scoped chat to players within 200 blocks. */
     public static final Block FIELD_TELEPHONE = new FieldTelephoneBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("field_telephone"))
                     .mapColor(MapColor.BLACK)
                     .sounds(BlockSoundGroup.METAL)
                     .strength(2.0f)
@@ -93,6 +106,7 @@ public class ModBlocks {
     /** Chest-like supply container, pre-filled from loot table. */
     public static final Block SUPPLY_CRATE = new SupplyCrateBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("supply_crate"))
                     .mapColor(MapColor.OAK_TAN)
                     .sounds(BlockSoundGroup.WOOD)
                     .strength(2.5f)
@@ -101,6 +115,7 @@ public class ModBlocks {
     /** Multi-block shell crater — decorative depression left by explosions. */
     public static final Block SHELL_CRATER = new ShellCraterBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("shell_crater"))
                     .mapColor(MapColor.DIRT_BROWN)
                     .sounds(BlockSoundGroup.GRAVEL)
                     .strength(0.3f)
@@ -109,6 +124,7 @@ public class ModBlocks {
     // ── Decorative Blocks ───────────────────────────────────────────────────
     public static final Block BARBED_WIRE_POST = new Block(
             AbstractBlock.Settings.create()
+                    .registryKey(key("barbed_wire_post"))
                     .mapColor(MapColor.IRON_GRAY)
                     .sounds(BlockSoundGroup.METAL)
                     .strength(1.0f)
@@ -116,6 +132,7 @@ public class ModBlocks {
 
     public static final Block RUSTED_IRON_BARS = new Block(
             AbstractBlock.Settings.create()
+                    .registryKey(key("rusted_iron_bars"))
                     .mapColor(MapColor.IRON_GRAY)
                     .sounds(BlockSoundGroup.METAL)
                     .strength(1.5f, 6.0f)
@@ -124,6 +141,7 @@ public class ModBlocks {
 
     public static final Block FLAG_BLOCK = new FlagBlock(
             AbstractBlock.Settings.create()
+                    .registryKey(key("flag_block"))
                     .mapColor(MapColor.WHITE)
                     .sounds(BlockSoundGroup.WOOL)
                     .strength(1.0f)
@@ -148,6 +166,10 @@ public class ModBlocks {
         registerBlock("flag_block",        FLAG_BLOCK);
 
         MindcraftMod.LOGGER.info("Blocks registered.");
+    }
+
+    private static RegistryKey<Block> key(String name) {
+        return RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(MindcraftMod.MOD_ID, name));
     }
 
     private static void registerBlock(String name, Block block) {
