@@ -1,6 +1,7 @@
 package com.mindcraftmod.block;
 
 import com.mindcraftmod.world.FactionManager;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -32,6 +33,13 @@ import net.minecraft.world.World;
  * For Phase 2, this block stores faction state and shows info on right-click.
  */
 public class FlagBlock extends HorizontalFacingBlock {
+
+    public static final MapCodec<FlagBlock> CODEC = createCodec(FlagBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
+    }
 
     /** Which faction owns this flag. */
     public enum FlagFaction implements StringIdentifiable {

@@ -147,7 +147,7 @@ public class WorldEventScheduler {
         for (ServerPlayerEntity player : players) {
             if (Math.abs(player.getBlockX() - cx) <= 15
                     && Math.abs(player.getBlockZ() - cz) <= 15) {
-                player.damage(world.getDamageSources().generic(), 3.0f);
+                player.damage(world, world.getDamageSources().generic(), 3.0f);
                 player.sendMessage(Text.literal("You were caught in the artillery barrage!"), true);
             }
         }

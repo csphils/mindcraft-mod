@@ -2,6 +2,7 @@ package com.mindcraftmod.world;
 
 import com.mindcraftmod.MindcraftMod;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateManager;
@@ -65,7 +66,7 @@ public class FactionManager extends PersistentState {
     // ── PersistentState serialization ───────────────────────────────────────
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
+    public NbtCompound writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         NbtCompound factions = new NbtCompound();
         playerFactions.forEach((uuid, faction) ->
                 factions.putString(uuid.toString(), faction.name()));
@@ -73,7 +74,7 @@ public class FactionManager extends PersistentState {
         return nbt;
     }
 
-    private static FactionManager fromNbt(NbtCompound nbt) {
+    private static FactionManager fromNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registries) {
         FactionManager manager = new FactionManager();
         NbtCompound factions = nbt.getCompound("playerFactions");
         for (String key : factions.getKeys()) {

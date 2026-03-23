@@ -44,7 +44,7 @@ public class CommandBunkerStructure extends Structure {
         int z = context.chunkPos().getCenterZ();
         int surfaceY = context.chunkGenerator().getHeight(
                 x, z, Heightmap.Type.WORLD_SURFACE_WG,
-                context.heightAccessor(), context.randomState());
+                context.world(), context.noiseConfig());
 
         BlockPos origin = new BlockPos(x, surfaceY - 8, z);
         return Optional.of(new StructurePosition(origin, collector ->

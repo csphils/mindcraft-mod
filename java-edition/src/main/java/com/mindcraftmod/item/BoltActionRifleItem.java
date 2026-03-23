@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
@@ -32,17 +33,17 @@ public class BoltActionRifleItem extends Item {
     }
 
     @Override
-    public ItemStack use(World world, PlayerEntity player, Hand hand) {
+    public ActionResult use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
 
         // Client predicts the click sound; server does everything else
         if (world.isClient) {
-            return stack;
+            return ActionResult.PASS;
         }
 
         // Check cooldown
         if (player.getItemCooldownManager().isCoolingDown(stack)) {
-            return stack;
+            return ActionResult.PASS;
         }
 
         // Try to consume ammo
@@ -52,7 +53,7 @@ public class BoltActionRifleItem extends Item {
             // Click sound — empty chamber
             world.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.PLAYERS, 0.5f, 2.0f);
-            return stack;
+            return ActionResult.FAIL;
         }
 
         // Fire — spawn projectile
@@ -71,7 +72,7 @@ public class BoltActionRifleItem extends Item {
         // Apply 1-second cooldown before next shot
         player.getItemCooldownManager().set(stack, COOLDOWN_TICKS);
 
-        return stack;
+        return ActionResult.SUCCESS;
     }
 
     /**

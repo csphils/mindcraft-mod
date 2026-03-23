@@ -239,7 +239,7 @@ public class MindcraftModGameTests {
 
         // Let Blindness apply for 5 ticks, then move entity out
         ctx.waitAndRun(5, () -> {
-            sheep.teleport(3, 1, 3); // outside smoke
+            sheep.teleport(3.0, 1.0, 3.0, false); // outside smoke
 
             // Check 2 ticks later — Blindness should still be active (duration was 80 ticks)
             ctx.runAtTick(ctx.getTick() + 2, () -> {

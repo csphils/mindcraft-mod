@@ -1,6 +1,7 @@
 package com.mindcraftmod.block;
 
 import com.mindcraftmod.block.entity.SupplyCrateBlockEntity;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +18,13 @@ import net.minecraft.world.World;
  * Does not double like a vanilla chest.
  */
 public class SupplyCrateBlock extends BlockWithEntity {
+
+    public static final MapCodec<SupplyCrateBlock> CODEC = createCodec(SupplyCrateBlock::new);
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return CODEC;
+    }
 
     public SupplyCrateBlock(Settings settings) {
         super(settings);

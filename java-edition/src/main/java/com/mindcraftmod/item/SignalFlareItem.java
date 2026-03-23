@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
@@ -42,7 +43,7 @@ public class SignalFlareItem extends Item {
     }
 
     @Override
-    public ItemStack use(World world, PlayerEntity player, Hand hand) {
+    public ActionResult use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
 
         if (!world.isClient) {
@@ -71,6 +72,6 @@ public class SignalFlareItem extends Item {
             }
         }
 
-        return stack;
+        return ActionResult.SUCCESS;
     }
 }

@@ -16,6 +16,6 @@ public class TrenchBayonetItem extends SwordItem {
 
     public TrenchBayonetItem(Settings settings) {
         // IRON ToolMaterial gives 6 total attack damage for swords at -2.4 attack speed
-        super(ToolMaterial.IRON, settings);
+        super(ToolMaterial.IRON, 3.0f, -2.4f, settings);
     }
 }

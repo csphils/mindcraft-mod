@@ -64,8 +64,8 @@ public class BarbedWireBlock extends Block {
                 StatusEffects.SLOWNESS, 30, 1, false, true));
 
         // Damage once per second (20 ticks). Use age as a cheap tick counter.
-        if (entity.age % 20 == 0) {
-            entity.damage(world.getDamageSources().thorns(entity), 1.0f);
+        if (entity.age % 20 == 0 && world instanceof net.minecraft.server.world.ServerWorld serverWorld) {
+            entity.damage(serverWorld, world.getDamageSources().thorns(entity), 1.0f);
         }
     }
 

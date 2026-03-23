@@ -44,7 +44,7 @@ public class ArtilleryEmplacementStructure extends Structure {
         int z = context.chunkPos().getCenterZ();
         int y = context.chunkGenerator().getHeight(
                 x, z, Heightmap.Type.WORLD_SURFACE_WG,
-                context.heightAccessor(), context.randomState());
+                context.world(), context.noiseConfig());
 
         BlockPos origin = new BlockPos(x, y, z);
         return Optional.of(new StructurePosition(origin, collector ->

@@ -1,6 +1,7 @@
 package com.mindcraftmod.block;
 
 import com.mindcraftmod.world.FactionManager;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalFacingBlock;
@@ -28,6 +29,13 @@ import net.minecraft.world.World;
  * Phase 6 will add a proper GUI; for now uses a server command workaround.
  */
 public class FieldTelephoneBlock extends HorizontalFacingBlock {
+
+    public static final MapCodec<FieldTelephoneBlock> CODEC = createCodec(FieldTelephoneBlock::new);
+
+    @Override
+    protected MapCodec<? extends HorizontalFacingBlock> getCodec() {
+        return CODEC;
+    }
 
     private static final VoxelShape SHAPE =
             Block.createCuboidShape(4, 0, 4, 12, 12, 12);

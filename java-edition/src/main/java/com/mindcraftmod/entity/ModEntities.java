@@ -6,6 +6,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 /**
@@ -59,11 +61,12 @@ public class ModEntities {
     private static <T extends Entity> EntityType<T> register(
             String id, SpawnGroup group, EntityType.EntityFactory<T> factory,
             float width, float height) {
-        return Registry.register(Registries.ENTITY_TYPE,
-                Identifier.of(MindcraftMod.MOD_ID, id),
+        RegistryKey<EntityType<?>> key = RegistryKey.of(
+                RegistryKeys.ENTITY_TYPE, Identifier.of(MindcraftMod.MOD_ID, id));
+        return Registry.register(Registries.ENTITY_TYPE, key,
                 EntityType.Builder.create(factory, group)
                         .dimensions(width, height)
-                        .build());
+                        .build(key));
     }
 
     public static void register() {
