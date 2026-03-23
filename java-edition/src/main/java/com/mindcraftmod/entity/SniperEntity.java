@@ -48,7 +48,8 @@ public class SniperEntity extends HostileEntity implements RangedAttackMob {
 
         // Target players; predicate halves detection range for crouching players
         this.targetSelector.add(1, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, 1, true, false,
-                (PlayerEntity player) -> {
+                entity -> {
+                    if (!(entity instanceof PlayerEntity player)) return false;
                     double range = player.isSneaking() ? CROUCH_RANGE : DETECTION_RANGE;
                     return this.squaredDistanceTo(player) < range * range;
                 }));
