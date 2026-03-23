@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
+import java.util.function.Predicate;
 
 /**
  * Sniper — rare hostile NPC positioned atop Observation Towers.
@@ -47,12 +48,12 @@ public class SniperEntity extends HostileEntity implements RangedAttackMob {
         this.goalSelector.add(3, new LookAroundGoal(this));
 
         // Target players; predicate halves detection range for crouching players
-        this.targetSelector.add(1, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, 1, true, false,
-                entity -> {
-                    if (!(entity instanceof PlayerEntity player)) return false;
-                    double range = player.isSneaking() ? CROUCH_RANGE : DETECTION_RANGE;
-                    return this.squaredDistanceTo(player) < range * range;
-                }));
+        Predicate<LivingEntity> rangePred = e -> {
+            if (!(e instanceof PlayerEntity p)) return false;
+            double range = p.isSneaking() ? CROUCH_RANGE : DETECTION_RANGE;
+            return this.squaredDistanceTo(p) < range * range;
+        };
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, 1, true, false, rangePred));
     }
 
     // ── RangedAttackMob ──────────────────────────────────────────────────────
