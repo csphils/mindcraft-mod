@@ -13,7 +13,8 @@
   "environment": "*",
   "entrypoints": {
     "main": ["com.mindcraftmod.MindcraftMod"],
-    "client": ["com.mindcraftmod.client.MindcraftModClient"]
+    "client": ["com.mindcraftmod.client.MindcraftModClient"],
+    "fabric-gametest": ["com.mindcraftmod.test.MindcraftModGameTests"]
   },
   "mixins": ["mindcraftmod.mixins.json"],
   "depends": {

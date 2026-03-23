@@ -1,0 +1,7 @@
+{
+  "type": "mindcraftmod:trench_network",
+  "biomes": "#mindcraftmod:has_structure/trench_network",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

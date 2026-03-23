@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "1.9-SNAPSHOT"
+    id "fabric-loom" version "1.8.9"
     id "maven-publish"
 }
 
@@ -26,6 +26,15 @@ dependencies {
 
     // Fabric API — provides hooks for world gen, networking, events, etc.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    // JUnit 5 — for unit tests (FactionManager NBT, SandbagBlock logic)
+    // These run with ./gradlew test, no Minecraft runtime needed
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+test {
+    useJUnitPlatform()
 }
 
 processResources {

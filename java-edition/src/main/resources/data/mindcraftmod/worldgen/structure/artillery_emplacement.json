@@ -1,0 +1,7 @@
+{
+  "type": "mindcraftmod:artillery_emplacement",
+  "biomes": "#mindcraftmod:has_structure/artillery_emplacement",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

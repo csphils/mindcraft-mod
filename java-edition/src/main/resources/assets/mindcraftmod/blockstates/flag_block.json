@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "faction=neutral,facing=north": {
+      "model": "mindcraftmod:block/flag_neutral",
+      "y": 0
+    },
+    "faction=neutral,facing=east": {
+      "model": "mindcraftmod:block/flag_neutral",
+      "y": 90
+    },
+    "faction=neutral,facing=south": {
+      "model": "mindcraftmod:block/flag_neutral",
+      "y": 180
+    },
+    "faction=neutral,facing=west": {
+      "model": "mindcraftmod:block/flag_neutral",
+      "y": 270
+    },
+    "faction=allied,facing=north": {
+      "model": "mindcraftmod:block/flag_allied",
+      "y": 0
+    },
+    "faction=allied,facing=east": {
+      "model": "mindcraftmod:block/flag_allied",
+      "y": 90
+    },
+    "faction=allied,facing=south": {
+      "model": "mindcraftmod:block/flag_allied",
+      "y": 180
+    },
+    "faction=allied,facing=west": {
+      "model": "mindcraftmod:block/flag_allied",
+      "y": 270
+    },
+    "faction=central,facing=north": {
+      "model": "mindcraftmod:block/flag_central",
+      "y": 0
+    },
+    "faction=central,facing=east": {
+      "model": "mindcraftmod:block/flag_central",
+      "y": 90
+    },
+    "faction=central,facing=south": {
+      "model": "mindcraftmod:block/flag_central",
+      "y": 180
+    },
+    "faction=central,facing=west": {
+      "model": "mindcraftmod:block/flag_central",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "mindcraftmod:artillery_emplacement",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 28,
+    "separation": 8,
+    "salt": 5501337
+  }
+}

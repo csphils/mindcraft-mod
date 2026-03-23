@@ -3,9 +3,7 @@
   "package": "com.mindcraftmod.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
-  "client": [
-    "MixinGameRenderer"
-  ],
+  "client": [],
   "injectors": {
     "defaultRequire": 1
   }

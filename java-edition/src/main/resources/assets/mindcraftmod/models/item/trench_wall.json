@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": { "wall": "mindcraftmod:block/trench_wall" }
+}

@@ -1,0 +1,101 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "comment": "Common drops",
+      "rolls": { "min": 2, "max": 4 },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:rifle_cartridge",
+          "weight": 30,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 8, "max": 16 } }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:field_rations",
+          "weight": 25,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 3, "max": 5 } }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gunpowder",
+          "weight": 20,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 4, "max": 8 } }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:mud_ball",
+          "weight": 15,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 2, "max": 6 } }
+          ]
+        }
+      ]
+    },
+    {
+      "comment": "Uncommon drops",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:trench_bayonet",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:gas_mask",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:grenade",
+          "weight": 15,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "min": 1, "max": 3 } }
+          ]
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 60
+        }
+      ]
+    },
+    {
+      "comment": "Rare drops",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:bolt_action_rifle",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:trench_coat",
+          "weight": 8
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:signal_flare_red",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:signal_flare_green",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 67
+        }
+      ]
+    }
+  ]
+}

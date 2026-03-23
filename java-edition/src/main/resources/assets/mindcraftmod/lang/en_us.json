@@ -47,5 +47,7 @@
   "chat.mindcraftmod.event_gas":           "[WAR EVENT] Gas attack at %s, %s! Equip your gas mask!",
   "chat.mindcraftmod.event_supply_drop":   "[WAR EVENT] Supply drop incoming at %s, %s!",
   "chat.mindcraftmod.event_reinforcements":"[WAR EVENT] Reinforcements arriving for %s!",
-  "chat.mindcraftmod.territory_captured":  "[TERRITORY] %s has captured a trench for the %s!"
+  "chat.mindcraftmod.territory_captured":  "[TERRITORY] %s has captured a trench for the %s!",
+
+  "container.mindcraftmod.supply_crate":   "Supply Crate"
 }

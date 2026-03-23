@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "mindcraftmod:command_bunker",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 30,
+    "separation": 10,
+    "salt": 4198423
+  }
+}

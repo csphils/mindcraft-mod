@@ -1,12 +1,13 @@
 package com.mindcraftmod.entity;
 
 import com.mindcraftmod.MindcraftMod;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 /**
@@ -19,72 +20,54 @@ public class ModEntities {
 
     // ── Passive ─────────────────────────────────────────────────────────────
     public static final EntityType<WarHorseEntity> WAR_HORSE =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "war_horse"),
-                    FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, WarHorseEntity::new)
-                            .dimensions(EntityDimensions.fixed(1.4f, 1.8f))
-                            .build());
+            register("war_horse", SpawnGroup.CREATURE, WarHorseEntity::new, 1.4f, 1.8f);
 
     public static final EntityType<CarrierPigeonEntity> CARRIER_PIGEON =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "carrier_pigeon"),
-                    FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CarrierPigeonEntity::new)
-                            .dimensions(EntityDimensions.fixed(0.3f, 0.3f))
-                            .build());
+            register("carrier_pigeon", SpawnGroup.CREATURE, CarrierPigeonEntity::new, 0.3f, 0.3f);
 
     public static final EntityType<TrenchRatEntity> TRENCH_RAT =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "trench_rat"),
-                    FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TrenchRatEntity::new)
-                            .dimensions(EntityDimensions.fixed(0.4f, 0.25f))
-                            .build());
+            register("trench_rat", SpawnGroup.CREATURE, TrenchRatEntity::new, 0.4f, 0.25f);
 
     // ── Neutral ─────────────────────────────────────────────────────────────
     public static final EntityType<GuardDogEntity> GUARD_DOG =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "guard_dog"),
-                    FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GuardDogEntity::new)
-                            .dimensions(EntityDimensions.fixed(0.6f, 0.85f))
-                            .build());
+            register("guard_dog", SpawnGroup.CREATURE, GuardDogEntity::new, 0.6f, 0.85f);
 
     // ── Hostile ─────────────────────────────────────────────────────────────
     public static final EntityType<TrenchSoldierEntity> TRENCH_SOLDIER =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "trench_soldier"),
-                    FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TrenchSoldierEntity::new)
-                            .dimensions(EntityDimensions.fixed(0.6f, 1.95f))
-                            .build());
+            register("trench_soldier", SpawnGroup.MONSTER, TrenchSoldierEntity::new, 0.6f, 1.95f);
 
     public static final EntityType<SniperEntity> SNIPER =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "sniper"),
-                    FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, SniperEntity::new)
-                            .dimensions(EntityDimensions.fixed(0.6f, 1.95f))
-                            .build());
+            register("sniper", SpawnGroup.MONSTER, SniperEntity::new, 0.6f, 1.95f);
 
     public static final EntityType<GasGrenadierEntity> GAS_GRENADIER =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "gas_grenadier"),
-                    FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, GasGrenadierEntity::new)
-                            .dimensions(EntityDimensions.fixed(0.6f, 1.95f))
-                            .build());
+            register("gas_grenadier", SpawnGroup.MONSTER, GasGrenadierEntity::new, 0.6f, 1.95f);
 
     // ── Projectiles ─────────────────────────────────────────────────────────
     public static final EntityType<TrenchRifleProjectile> TRENCH_RIFLE_PROJECTILE =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "trench_rifle_projectile"),
-                    FabricEntityTypeBuilder.<TrenchRifleProjectile>create(SpawnGroup.MISC,
-                                    TrenchRifleProjectile::new)
-                            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-                            .build());
+            register("trench_rifle_projectile", SpawnGroup.MISC, TrenchRifleProjectile::new, 0.25f, 0.25f);
 
     public static final EntityType<GasCanisteProjectile> GAS_CANISTE_PROJECTILE =
-            Registry.register(Registries.ENTITY_TYPE,
-                    Identifier.of(MindcraftMod.MOD_ID, "gas_caniste_projectile"),
-                    FabricEntityTypeBuilder.<GasCanisteProjectile>create(SpawnGroup.MISC,
-                                    GasCanisteProjectile::new)
-                            .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
-                            .build());
+            register("gas_caniste_projectile", SpawnGroup.MISC, GasCanisteProjectile::new, 0.25f, 0.25f);
+
+    public static final EntityType<GrenadeEntity> GRENADE =
+            register("grenade", SpawnGroup.MISC, GrenadeEntity::new, 0.25f, 0.25f);
+
+    public static final EntityType<SignalFlareProjectile> SIGNAL_FLARE_PROJECTILE =
+            register("signal_flare_projectile", SpawnGroup.MISC, SignalFlareProjectile::new, 0.25f, 0.25f);
+
+    public static final EntityType<MudBallProjectile> MUD_BALL_PROJECTILE =
+            register("mud_ball_projectile", SpawnGroup.MISC, MudBallProjectile::new, 0.25f, 0.25f);
+
+    private static <T extends Entity> EntityType<T> register(
+            String id, SpawnGroup group, EntityType.EntityFactory<T> factory,
+            float width, float height) {
+        RegistryKey<EntityType<?>> key = RegistryKey.of(
+                RegistryKeys.ENTITY_TYPE, Identifier.of(MindcraftMod.MOD_ID, id));
+        return Registry.register(Registries.ENTITY_TYPE, key,
+                EntityType.Builder.create(factory, group)
+                        .dimensions(width, height)
+                        .build(key));
+    }
 
     public static void register() {
         // All registration happens in field initializers above.

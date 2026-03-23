@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BGY"
+  ],
+  "key": {
+    "B": { "item": "minecraft:glass_bottle" },
+    "G": { "item": "minecraft:gunpowder" },
+    "Y": { "item": "minecraft:yellow_dye" }
+  },
+  "result": {
+    "id": "mindcraftmod:gas_canister",
+    "count": 1
+  }
+}

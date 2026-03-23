@@ -3,6 +3,7 @@ package com.mindcraftmod.item;
 import com.mindcraftmod.MindcraftMod;
 import com.mindcraftmod.block.ModBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -28,10 +29,10 @@ public class ModItems {
 
     // ── Armor ────────────────────────────────────────────────────────────────
     public static final Item GAS_MASK = new GasMaskItem(
-            new Item.Settings().maxCount(1).maxDamage(165));
+            new Item.Settings().maxCount(1).maxDamage(165).equippable(EquipmentSlot.HEAD));
 
     public static final Item TRENCH_COAT = new TrenchCoatItem(
-            new Item.Settings().maxCount(1).maxDamage(240));
+            new Item.Settings().maxCount(1).maxDamage(240).equippable(EquipmentSlot.CHEST));
 
     public static final Item HORSE_ARMOR_PLATE = new Item(
             new Item.Settings().maxCount(1));

@@ -1,0 +1,7 @@
+{
+  "type": "mindcraftmod:observation_tower",
+  "biomes": "#mindcraftmod:has_structure/observation_tower",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}

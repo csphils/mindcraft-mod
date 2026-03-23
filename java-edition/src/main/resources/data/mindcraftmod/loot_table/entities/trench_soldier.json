@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:rifle_cartridge",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": { "min": 4, "max": 8 }
+            },
+            { "function": "minecraft:looting_enchant", "count": { "min": 0, "max": 2 } }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:trench_bayonet",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mindcraftmod:bolt_action_rifle",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 87
+        }
+      ]
+    }
+  ]
+}

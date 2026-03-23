@@ -1,0 +1,18 @@
+{
+  "display": {
+    "icon": { "id": "mindcraftmod:field_rations" },
+    "title": { "translate": "advancements.mindcraftmod.tame_dog.title", "fallback": "Man's Best Comrade" },
+    "description": { "translate": "advancements.mindcraftmod.tame_dog.description", "fallback": "Tame a Guard Dog with Field Rations" },
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "parent": "mindcraftmod:root",
+  "criteria": {
+    "has_field_rations": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{ "items": "mindcraftmod:field_rations" }]
+      }
+    }
+  }
+}

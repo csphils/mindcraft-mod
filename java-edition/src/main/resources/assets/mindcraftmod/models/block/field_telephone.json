@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "mindcraftmod:block/field_telephone",
+    "down":  "mindcraftmod:block/field_telephone",
+    "up":    "mindcraftmod:block/field_telephone",
+    "north": "mindcraftmod:block/field_telephone",
+    "south": "mindcraftmod:block/field_telephone",
+    "east":  "mindcraftmod:block/field_telephone",
+    "west":  "mindcraftmod:block/field_telephone"
+  },
+  "elements": [
+    {
+      "from": [4, 0, 4],
+      "to": [12, 12, 12],
+      "faces": {
+        "down":  { "texture": "#down",  "cullface": "down" },
+        "up":    { "texture": "#up" },
+        "north": { "texture": "#north" },
+        "south": { "texture": "#south" },
+        "east":  { "texture": "#east" },
+        "west":  { "texture": "#west" }
+      }
+    }
+  ]
+}

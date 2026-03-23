@@ -1,0 +1,7 @@
+{
+  "type": "mindcraftmod:ruined_village",
+  "biomes": "#mindcraftmod:has_structure/ruined_village",
+  "step": "surface_structures",
+  "spawn_overrides": {},
+  "terrain_adaptation": "none"
+}
