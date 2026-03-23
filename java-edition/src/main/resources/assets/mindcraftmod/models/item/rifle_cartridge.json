@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "mindcraftmod:item/rifle_cartridge"
+    "layer0": "minecraft:item/arrow"
   }
 }
