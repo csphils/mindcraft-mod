@@ -8,59 +8,64 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 /**
  * Central registry for all mod items.
  *
  * Run AFTER ModBlocks.register() so block items can reference registered blocks.
+ *
+ * NOTE: In 1.21.4 Item.<init> calls settings.getTranslationKey() immediately,
+ * so every Item.Settings must have registryKey() set before instantiation.
  */
 public class ModItems {
 
     // ── Weapons ─────────────────────────────────────────────────────────────
     public static final Item BOLT_ACTION_RIFLE = new BoltActionRifleItem(
-            new Item.Settings().maxCount(1).maxDamage(384));
+            new Item.Settings().registryKey(key("bolt_action_rifle")).maxCount(1).maxDamage(384));
 
     public static final Item TRENCH_BAYONET = new TrenchBayonetItem(
-            new Item.Settings().maxCount(1).maxDamage(300));
+            new Item.Settings().registryKey(key("trench_bayonet")).maxCount(1).maxDamage(300));
 
     public static final Item GRENADE = new GrenadeItem(
-            new Item.Settings().maxCount(16));
+            new Item.Settings().registryKey(key("grenade")).maxCount(16));
 
     // ── Armor ────────────────────────────────────────────────────────────────
     public static final Item GAS_MASK = new GasMaskItem(
-            new Item.Settings().maxCount(1).maxDamage(165).equippable(EquipmentSlot.HEAD));
+            new Item.Settings().registryKey(key("gas_mask")).maxCount(1).maxDamage(165).equippable(EquipmentSlot.HEAD));
 
     public static final Item TRENCH_COAT = new TrenchCoatItem(
-            new Item.Settings().maxCount(1).maxDamage(240).equippable(EquipmentSlot.CHEST));
+            new Item.Settings().registryKey(key("trench_coat")).maxCount(1).maxDamage(240).equippable(EquipmentSlot.CHEST));
 
     public static final Item HORSE_ARMOR_PLATE = new Item(
-            new Item.Settings().maxCount(1));
+            new Item.Settings().registryKey(key("horse_armor_plate")).maxCount(1));
 
     // ── Utility ──────────────────────────────────────────────────────────────
     public static final Item FIELD_RATIONS = new FieldRationsItem(
-            new Item.Settings().maxCount(16).food(ModFoodComponents.FIELD_RATIONS));
+            new Item.Settings().registryKey(key("field_rations")).maxCount(16).food(ModFoodComponents.FIELD_RATIONS));
 
     public static final Item SIGNAL_FLARE_RED = new SignalFlareItem(
-            SignalFlareItem.Type.RED, new Item.Settings().maxCount(16));
+            SignalFlareItem.Type.RED, new Item.Settings().registryKey(key("signal_flare_red")).maxCount(16));
 
     public static final Item SIGNAL_FLARE_GREEN = new SignalFlareItem(
-            SignalFlareItem.Type.GREEN, new Item.Settings().maxCount(16));
+            SignalFlareItem.Type.GREEN, new Item.Settings().registryKey(key("signal_flare_green")).maxCount(16));
 
     public static final Item SIGNAL_FLARE_GRAY = new SignalFlareItem(
-            SignalFlareItem.Type.GRAY, new Item.Settings().maxCount(16));
+            SignalFlareItem.Type.GRAY, new Item.Settings().registryKey(key("signal_flare_gray")).maxCount(16));
 
     public static final Item RIFLE_CARTRIDGE = new Item(
-            new Item.Settings().maxCount(64));
+            new Item.Settings().registryKey(key("rifle_cartridge")).maxCount(64));
 
     public static final Item GAS_CANISTER = new GasCanisteItem(
-            new Item.Settings().maxCount(8));
+            new Item.Settings().registryKey(key("gas_canister")).maxCount(8));
 
     public static final Item MUD_BALL = new MudBallItem(
-            new Item.Settings().maxCount(16));
+            new Item.Settings().registryKey(key("mud_ball")).maxCount(16));
 
     public static final Item LEATHER_SCRAP = new Item(
-            new Item.Settings().maxCount(64));
+            new Item.Settings().registryKey(key("leather_scrap")).maxCount(64));
 
     // ── Block Items (auto-generated from blocks) ──────────────────────────────
     // Block items let players hold mod blocks in inventory.
@@ -104,6 +109,10 @@ public class ModItems {
         MindcraftMod.LOGGER.info("Items registered.");
     }
 
+    private static RegistryKey<Item> key(String name) {
+        return RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MindcraftMod.MOD_ID, name));
+    }
+
     private static void registerItem(String name, Item item) {
         Registry.register(Registries.ITEM, Identifier.of(MindcraftMod.MOD_ID, name), item);
     }
@@ -111,6 +120,6 @@ public class ModItems {
     private static void registerBlockItem(String name, Block block) {
         Registry.register(Registries.ITEM,
                 Identifier.of(MindcraftMod.MOD_ID, name),
-                new BlockItem(block, new Item.Settings()));
+                new BlockItem(block, new Item.Settings().registryKey(key(name))));
     }
 }
