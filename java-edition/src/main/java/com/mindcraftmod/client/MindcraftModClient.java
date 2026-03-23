@@ -8,7 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.entity.ThrownItemEntityRenderer;
+import net.minecraft.client.render.entity.projectile.ThrownItemEntityRenderer;
 import net.minecraft.util.Identifier;
 
 /**

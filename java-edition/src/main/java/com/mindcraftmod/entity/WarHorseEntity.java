@@ -47,10 +47,10 @@ public class WarHorseEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 30.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.225)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0)
-                .add(EntityAttributes.GENERIC_ARMOR, 2.0); // base armor; +4 with plate
+                .add(EntityAttributes.MAX_HEALTH, 30.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.225)
+                .add(EntityAttributes.FOLLOW_RANGE, 16.0)
+                .add(EntityAttributes.ARMOR, 2.0); // base armor; +4 with plate
     }
 
     @Override
@@ -82,12 +82,13 @@ public class WarHorseEntity extends AnimalEntity {
     }
 
     private void performCavalryCharge() {
+        ServerWorld serverWorld = (ServerWorld) this.getWorld();
         DamageSource chargeSource = this.getDamageSources().mobAttack(this);
         for (Entity nearby : this.getWorld().getOtherEntities(this,
                 this.getBoundingBox().expand(CHARGE_RADIUS))) {
             if (nearby instanceof LivingEntity living && !(nearby instanceof PlayerEntity rider
                     && this.hasPassenger(rider))) {
-                living.damage(chargeSource, 10.0f);
+                living.damage(serverWorld, chargeSource, 10.0f);
                 this.playSound(SoundEvents.ENTITY_HORSE_ANGRY, 1.0f, 1.0f);
             }
         }
@@ -104,10 +105,10 @@ public class WarHorseEntity extends AnimalEntity {
             armorPlateEquipped = true;
             if (!player.getAbilities().creativeMode) held.decrement(1);
             // Add +4 armor on top of base
-            this.getAttributeInstance(EntityAttributes.GENERIC_ARMOR)
+            this.getAttributeInstance(EntityAttributes.ARMOR)
                     .setBaseValue(6.0); // 2 base + 4 plate
             player.sendMessage(net.minecraft.text.Text.literal("Horse armored up!"), true);
-            this.playSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.0f, 1.0f);
+            this.playSound(SoundEvents.ITEM_ARMOR_EQUIP_IRON.value(), 1.0f, 1.0f);
             return ActionResult.SUCCESS;
         }
 
@@ -127,7 +128,6 @@ public class WarHorseEntity extends AnimalEntity {
         return false;
     }
 
-    @Override
     protected boolean isControlledByRider() {
         return this.getFirstPassenger() instanceof PlayerEntity;
     }

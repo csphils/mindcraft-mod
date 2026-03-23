@@ -46,17 +46,16 @@ public class CarrierPigeonEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 6.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_FLYING_SPEED, 0.6)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 32.0);
+                .add(EntityAttributes.MAX_HEALTH, 6.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.FLYING_SPEED, 0.6)
+                .add(EntityAttributes.FOLLOW_RANGE, 32.0);
     }
 
     @Override
     protected EntityNavigation createNavigation(World world) {
         BirdNavigation nav = new BirdNavigation(this, world);
         nav.setCanPathThroughDoors(false);
-        nav.setCanEnterOpenDoors(false);
         return nav;
     }
 
@@ -67,6 +66,11 @@ public class CarrierPigeonEntity extends AnimalEntity {
         this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(6, new LookAroundGoal(this));
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 
     // ── Delivery mechanic ────────────────────────────────────────────────────
@@ -105,7 +109,7 @@ public class CarrierPigeonEntity extends AnimalEntity {
                 player.sendMessage(Text.literal("The pigeon takes the book and flies toward " + target.getName().getString() + "!"), true);
             } else {
                 player.sendMessage(Text.literal("No faction-mate online — the pigeon drops the book nearby."), true);
-                this.dropStack(deliveryStack);
+                this.dropStack(serverWorld, deliveryStack);
                 deliveryStack = null;
             }
             return ActionResult.SUCCESS;
@@ -131,7 +135,7 @@ public class CarrierPigeonEntity extends AnimalEntity {
                 }
             } else {
                 // Target logged off — drop book
-                this.dropStack(deliveryStack);
+                this.dropStack(world, deliveryStack);
                 deliveryStack = null;
                 deliveryTarget = null;
             }

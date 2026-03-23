@@ -29,7 +29,7 @@ public class GasCanisteProjectile extends ThrownItemEntity {
 
     public GasCanisteProjectile(EntityType<? extends ThrownItemEntity> entityType,
                                  LivingEntity owner, World world) {
-        super(entityType, owner, world);
+        super(entityType, owner, world, new net.minecraft.item.ItemStack(ModItems.GAS_CANISTER));
     }
 
     @Override

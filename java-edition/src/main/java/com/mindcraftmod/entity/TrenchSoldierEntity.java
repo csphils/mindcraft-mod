@@ -29,10 +29,10 @@ public class TrenchSoldierEntity extends HostileEntity implements RangedAttackMo
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 20.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3.0);
+                .add(EntityAttributes.MAX_HEALTH, 20.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.FOLLOW_RANGE, 20.0)
+                .add(EntityAttributes.ATTACK_DAMAGE, 3.0);
     }
 
     @Override
@@ -46,13 +46,13 @@ public class TrenchSoldierEntity extends HostileEntity implements RangedAttackMo
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(5, new LookAroundGoal(this));
 
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(1, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
     }
 
     // ── RangedAttackMob ──────────────────────────────────────────────────────
 
     @Override
-    public void attack(LivingEntity target, float pullProgress) {
+    public void shootAt(LivingEntity target, float pullProgress) {
         if (this.getWorld().isClient) return;
 
         TrenchRifleProjectile projectile = new TrenchRifleProjectile(ModEntities.TRENCH_RIFLE_PROJECTILE,

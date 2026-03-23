@@ -4,7 +4,7 @@ import com.mindcraftmod.MindcraftMod;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.structure.StructurePieceType;
+import net.minecraft.structure.StructurePieceType;
 
 /**
  * Registers StructurePieceType instances for all mod structures.

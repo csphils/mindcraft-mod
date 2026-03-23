@@ -32,10 +32,10 @@ public class GasGrenadierEntity extends HostileEntity implements RangedAttackMob
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 18.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.22)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) THROW_RANGE)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0);
+                .add(EntityAttributes.MAX_HEALTH, 18.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.22)
+                .add(EntityAttributes.FOLLOW_RANGE, (double) THROW_RANGE)
+                .add(EntityAttributes.ATTACK_DAMAGE, 2.0);
     }
 
     @Override
@@ -50,13 +50,13 @@ public class GasGrenadierEntity extends HostileEntity implements RangedAttackMob
         this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(6, new LookAroundGoal(this));
 
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(1, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, true));
     }
 
     // ── RangedAttackMob ──────────────────────────────────────────────────────
 
     @Override
-    public void attack(LivingEntity target, float pullProgress) {
+    public void shootAt(LivingEntity target, float pullProgress) {
         if (this.getWorld().isClient) return;
 
         GasCanisteProjectile canister = new GasCanisteProjectile(

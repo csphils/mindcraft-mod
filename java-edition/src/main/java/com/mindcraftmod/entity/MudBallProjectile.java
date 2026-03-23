@@ -27,7 +27,7 @@ public class MudBallProjectile extends ThrownItemEntity {
 
     public MudBallProjectile(EntityType<? extends ThrownItemEntity> entityType,
                               LivingEntity owner, World world) {
-        super(entityType, owner, world);
+        super(entityType, owner, world, new net.minecraft.item.ItemStack(ModItems.MUD_BALL));
     }
 
     @Override

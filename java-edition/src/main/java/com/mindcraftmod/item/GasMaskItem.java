@@ -1,8 +1,6 @@
 package com.mindcraftmod.item;
 
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterials;
-import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.item.Item;
 
 /**
  * Gas Mask — helmet armor that negates Gas Cloud and Smoke Screen effects.
@@ -12,9 +10,9 @@ import net.minecraft.item.equipment.EquipmentType;
  * - Special: GasCloudBlock and SmokeScreenBlock check instanceof GasMaskItem to skip effects
  * - Crafting: 2x Iron Ingot + 2x Glass Pane + 1x String
  */
-public class GasMaskItem extends ArmorItem {
+public class GasMaskItem extends Item {
 
     public GasMaskItem(Settings settings) {
-        super(ArmorMaterials.IRON, EquipmentType.HELMET, settings);
+        super(settings);
     }
 }

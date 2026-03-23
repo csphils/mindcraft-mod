@@ -42,10 +42,10 @@ public class GuardDogEntity extends TameableEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.30)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 16.0);
+                .add(EntityAttributes.MAX_HEALTH, 20.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.30)
+                .add(EntityAttributes.ATTACK_DAMAGE, 5.0)
+                .add(EntityAttributes.FOLLOW_RANGE, 16.0);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class GuardDogEntity extends TameableEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new SitGoal(this));
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.2, true));
-        this.goalSelector.add(3, new FollowOwnerGoal(this, 1.0, 10.0f, 2.0f, false));
+        this.goalSelector.add(3, new FollowOwnerGoal(this, 1.0, 10.0f, 2.0f));
         this.goalSelector.add(4, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(5, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(6, new LookAroundGoal(this));
@@ -62,8 +62,13 @@ public class GuardDogEntity extends TameableEntity {
         this.targetSelector.add(1, new TrackOwnerAttackerGoal(this));
         this.targetSelector.add(2, new AttackWithOwnerGoal(this));
         // Untamed: attack players who come too close (range enforced by follow-range attr)
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, false,
+        this.targetSelector.add(3, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, false,
                 entity -> !this.isTamed()));
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 
     // ── Taming mechanic ──────────────────────────────────────────────────────

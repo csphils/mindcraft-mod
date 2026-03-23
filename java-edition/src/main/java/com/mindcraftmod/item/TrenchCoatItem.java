@@ -1,8 +1,6 @@
 package com.mindcraftmod.item;
 
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterials;
-import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.item.Item;
 
 /**
  * Trench Coat — chestplate armor that reduces Mud Pit slowness.
@@ -12,9 +10,9 @@ import net.minecraft.item.equipment.EquipmentType;
  * - Special: MudPitBlock checks instanceof TrenchCoatItem to give Slowness I instead of II
  * - Crafting: 7x Leather + 1x Iron Ingot (center, standard chestplate pattern)
  */
-public class TrenchCoatItem extends ArmorItem {
+public class TrenchCoatItem extends Item {
 
     public TrenchCoatItem(Settings settings) {
-        super(ArmorMaterials.IRON, EquipmentType.CHESTPLATE, settings);
+        super(settings);
     }
 }

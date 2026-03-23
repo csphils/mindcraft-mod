@@ -32,10 +32,10 @@ public class SniperEntity extends HostileEntity implements RangedAttackMob {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0)   // stationary
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) DETECTION_RANGE)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 8.0);
+                .add(EntityAttributes.MAX_HEALTH, 20.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.0)   // stationary
+                .add(EntityAttributes.FOLLOW_RANGE, (double) DETECTION_RANGE)
+                .add(EntityAttributes.ATTACK_DAMAGE, 8.0);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class SniperEntity extends HostileEntity implements RangedAttackMob {
         this.goalSelector.add(3, new LookAroundGoal(this));
 
         // Target players; predicate halves detection range for crouching players
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true,
+        this.targetSelector.add(1, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, true,
                 player -> {
                     double range = player.isSneaking() ? CROUCH_RANGE : DETECTION_RANGE;
                     return this.squaredDistanceTo(player) < range * range;
@@ -57,7 +57,7 @@ public class SniperEntity extends HostileEntity implements RangedAttackMob {
     // ── RangedAttackMob ──────────────────────────────────────────────────────
 
     @Override
-    public void attack(LivingEntity target, float pullProgress) {
+    public void shootAt(LivingEntity target, float pullProgress) {
         if (this.getWorld().isClient) return;
 
         TrenchRifleProjectile projectile = new TrenchRifleProjectile(ModEntities.TRENCH_RIFLE_PROJECTILE,

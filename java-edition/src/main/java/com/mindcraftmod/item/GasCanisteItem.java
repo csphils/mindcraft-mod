@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 /**
@@ -29,7 +28,7 @@ public class GasCanisteItem extends Item {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public ItemStack use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
 
         if (!world.isClient) {
@@ -47,6 +46,6 @@ public class GasCanisteItem extends Item {
             }
         }
 
-        return TypedActionResult.success(stack, world.isClient);
+        return stack;
     }
 }

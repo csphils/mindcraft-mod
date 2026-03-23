@@ -1,7 +1,7 @@
 package com.mindcraftmod.item;
 
 import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterials;
+import net.minecraft.item.ToolMaterial;
 
 /**
  * Trench Bayonet — a close-quarters melee weapon.
@@ -16,6 +16,6 @@ public class TrenchBayonetItem extends SwordItem {
 
     public TrenchBayonetItem(Settings settings) {
         // IRON ToolMaterial gives 6 total attack damage for swords at -2.4 attack speed
-        super(ToolMaterials.IRON, settings);
+        super(ToolMaterial.IRON, settings);
     }
 }

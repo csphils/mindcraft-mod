@@ -37,7 +37,7 @@ public class SignalFlareProjectile extends ThrownItemEntity {
     public SignalFlareProjectile(EntityType<? extends ThrownItemEntity> entityType,
                                   LivingEntity owner, World world,
                                   SignalFlareItem.Type type) {
-        super(entityType, owner, world);
+        super(entityType, owner, world, new ItemStack(ModItems.SIGNAL_FLARE_GRAY));
         this.flareType = type;
     }
 

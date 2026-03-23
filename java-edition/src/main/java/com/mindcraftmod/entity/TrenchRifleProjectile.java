@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
@@ -25,7 +27,7 @@ public class TrenchRifleProjectile extends ThrownItemEntity {
 
     public TrenchRifleProjectile(EntityType<? extends ThrownItemEntity> entityType,
                                   LivingEntity owner, World world) {
-        super(entityType, owner, world);
+        super(entityType, owner, world, new ItemStack(ModItems.BOLT_ACTION_RIFLE));
     }
 
     @Override
@@ -43,8 +45,9 @@ public class TrenchRifleProjectile extends ThrownItemEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
-            entityHitResult.getEntity().damage(
-                    this.getWorld().getDamageSources().thrown(this, this.getOwner()),
+            ServerWorld serverWorld = (ServerWorld) this.getWorld();
+            entityHitResult.getEntity().damage(serverWorld,
+                    serverWorld.getDamageSources().thrown(this, this.getOwner()),
                     8.0f
             );
             this.discard();

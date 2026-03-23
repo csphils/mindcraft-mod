@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 /**
@@ -33,17 +32,17 @@ public class BoltActionRifleItem extends Item {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public ItemStack use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getStackInHand(hand);
 
         // Client predicts the click sound; server does everything else
         if (world.isClient) {
-            return TypedActionResult.consume(stack);
+            return stack;
         }
 
         // Check cooldown
-        if (player.getItemCooldownManager().isCoolingDown(this)) {
-            return TypedActionResult.fail(stack);
+        if (player.getItemCooldownManager().isCoolingDown(stack)) {
+            return stack;
         }
 
         // Try to consume ammo
@@ -53,7 +52,7 @@ public class BoltActionRifleItem extends Item {
             // Click sound — empty chamber
             world.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.PLAYERS, 0.5f, 2.0f);
-            return TypedActionResult.fail(stack);
+            return stack;
         }
 
         // Fire — spawn projectile
@@ -70,9 +69,9 @@ public class BoltActionRifleItem extends Item {
         stack.damage(1, player, hand == Hand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
 
         // Apply 1-second cooldown before next shot
-        player.getItemCooldownManager().set(this, COOLDOWN_TICKS);
+        player.getItemCooldownManager().set(stack, COOLDOWN_TICKS);
 
-        return TypedActionResult.consume(stack);
+        return stack;
     }
 
     /**
