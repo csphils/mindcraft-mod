@@ -96,7 +96,7 @@ public class FactionManager extends PersistentState {
      * Do NOT call from mod code; use {@link #get(MinecraftServer)} instead.
      */
     static FactionManager fromNbtForTest(NbtCompound nbt) {
-        return fromNbt(nbt);
+        return fromNbt(nbt, null);
     }
 
     public static FactionManager get(MinecraftServer server) {
