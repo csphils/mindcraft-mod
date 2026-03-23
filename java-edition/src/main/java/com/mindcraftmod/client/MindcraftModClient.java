@@ -8,7 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.entity.projectile.ThrownItemEntityRenderer;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.util.Identifier;
 
 /**
@@ -20,7 +20,7 @@ import net.minecraft.util.Identifier;
  *   substitutes a vanilla texture appropriate to each mob's shape/role.
  *   Replace in Sprint 9 (Art Pass) with custom CuboidEntityModel subclasses.
  *
- * All projectile types extend ThrownItemEntity so ThrownItemEntityRenderer works
+ * All projectile types extend ThrownItemEntity so FlyingItemEntityRenderer works
  * out of the box — it renders the item returned by getDefaultItem().
  */
 @Environment(EnvType.CLIENT)
@@ -63,17 +63,17 @@ public class MindcraftModClient implements ClientModInitializer {
         EntityRendererRegistry.register(ModEntities.TRENCH_RAT,
                 ctx -> new WW1MobRenderer<>(ctx, BAT));
 
-        // Projectiles — ThrownItemEntityRenderer renders the held item model
+        // Projectiles — FlyingItemEntityRenderer renders the held item model
         EntityRendererRegistry.register(ModEntities.TRENCH_RIFLE_PROJECTILE,
-                ctx -> new ThrownItemEntityRenderer<>(ctx));
+                ctx -> new FlyingItemEntityRenderer<>(ctx));
         EntityRendererRegistry.register(ModEntities.GAS_CANISTE_PROJECTILE,
-                ctx -> new ThrownItemEntityRenderer<>(ctx));
+                ctx -> new FlyingItemEntityRenderer<>(ctx));
         EntityRendererRegistry.register(ModEntities.GRENADE,
-                ctx -> new ThrownItemEntityRenderer<>(ctx));
+                ctx -> new FlyingItemEntityRenderer<>(ctx));
         EntityRendererRegistry.register(ModEntities.SIGNAL_FLARE_PROJECTILE,
-                ctx -> new ThrownItemEntityRenderer<>(ctx));
+                ctx -> new FlyingItemEntityRenderer<>(ctx));
         EntityRendererRegistry.register(ModEntities.MUD_BALL_PROJECTILE,
-                ctx -> new ThrownItemEntityRenderer<>(ctx));
+                ctx -> new FlyingItemEntityRenderer<>(ctx));
     }
 
     // ── Networking ────────────────────────────────────────────────────────────

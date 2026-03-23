@@ -2,7 +2,7 @@ package com.mindcraftmod.client.renderer;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.model.HumanoidEntityModel;
+import net.minecraft.client.model.BipedEntityModel;
 import net.minecraft.client.render.entity.BipedEntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
@@ -25,7 +25,7 @@ import net.minecraft.util.Identifier;
  * @param <T> any MobEntity subtype — covers all hostile NPCs, animals, and tameable mobs
  */
 @Environment(EnvType.CLIENT)
-public class WW1MobRenderer<T extends MobEntity> extends BipedEntityRenderer<T, HumanoidEntityModel<T>, HumanoidEntityModel<T>> {
+public class WW1MobRenderer<T extends MobEntity> extends BipedEntityRenderer<T, BipedEntityModel<T>, BipedEntityModel<T>> {
 
     private final Identifier texture;
 
@@ -35,7 +35,7 @@ public class WW1MobRenderer<T extends MobEntity> extends BipedEntityRenderer<T, 
      *                {@code Identifier.of("minecraft", "textures/entity/zombie/zombie.png")}
      */
     public WW1MobRenderer(EntityRendererFactory.Context ctx, Identifier texture) {
-        super(ctx, new HumanoidEntityModel<>(ctx.getPart(EntityModelLayers.ZOMBIE)), 0.5f);
+        super(ctx, new BipedEntityModel<>(ctx.getPart(EntityModelLayers.ZOMBIE)), 0.5f);
         this.texture = texture;
     }
 
