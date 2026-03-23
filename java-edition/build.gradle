@@ -38,10 +38,11 @@ test {
 }
 
 processResources {
-    inputs.property "version", project.version
+    def modVersion = version
+    inputs.property "version", modVersion
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand "version": modVersion
     }
 }
 
