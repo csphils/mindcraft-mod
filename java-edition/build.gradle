@@ -10,6 +10,18 @@ base {
     archivesName = project.archives_base_name
 }
 
+loom {
+    runs {
+        client {
+            // Redirect all native-library temp extraction off C: (which may be full)
+            vmArg "-Djava.io.tmpdir=D:\\.gradle\\tmp"
+            vmArg "-Djna.tmpdir=D:\\.gradle\\tmp"
+            vmArg "-Dorg.lwjgl.system.SharedLibraryExtractPath=D:\\.gradle\\tmp\\lwjgl"
+            vmArg "-Dorg.lwjgl.librarypath=D:\\.gradle\\tmp\\lwjgl"
+        }
+    }
+}
+
 repositories {
     // Add mod dependencies here as needed
 }
