@@ -99,6 +99,15 @@ public class FactionManager extends PersistentState {
         return fromNbt(nbt, null);
     }
 
+    /**
+     * Package-visible write helper for unit tests — mirrors fromNbtForTest.
+     * Passes null registries; safe because writeNbt does not use registries.
+     * Do NOT call from mod code; use the PersistentState save lifecycle instead.
+     */
+    static NbtCompound writeNbtForTest(FactionManager manager) {
+        return manager.writeNbt(new NbtCompound(), null);
+    }
+
     public static FactionManager get(MinecraftServer server) {
         PersistentStateManager psm = server
                 .getWorld(net.minecraft.world.World.OVERWORLD)

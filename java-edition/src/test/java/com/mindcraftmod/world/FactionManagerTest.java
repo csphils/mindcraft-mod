@@ -117,7 +117,7 @@ class FactionManagerTest {
         manager.setFaction(carol, NONE);
 
         // Serialize
-        NbtCompound nbt = manager.writeNbt(new NbtCompound());
+        NbtCompound nbt = FactionManager.writeNbtForTest(manager);
 
         // Deserialize into a new instance by calling fromNbt via reflection
         // (fromNbt is package-private; we test via the public Type factory indirectly)
@@ -130,7 +130,7 @@ class FactionManagerTest {
 
     @Test
     void nbtRoundTrip_emptyManager_roundTripsCleanly() {
-        NbtCompound nbt = manager.writeNbt(new NbtCompound());
+        NbtCompound nbt = FactionManager.writeNbtForTest(manager);
         FactionManager restored = FactionManager.fromNbtForTest(nbt);
         assertEquals(NONE, restored.getFaction(UUID.randomUUID()));
     }
@@ -143,7 +143,7 @@ class FactionManagerTest {
             manager.setFaction(players[i], i % 2 == 0 ? ALLIES : CENTRAL_POWERS);
         }
 
-        NbtCompound nbt = manager.writeNbt(new NbtCompound());
+        NbtCompound nbt = FactionManager.writeNbtForTest(manager);
         FactionManager restored = FactionManager.fromNbtForTest(nbt);
 
         for (int i = 0; i < players.length; i++) {
