@@ -64,7 +64,7 @@ public class GuardDogEntity extends TameableEntity {
         this.targetSelector.add(2, new AttackWithOwnerGoal(this));
         // Untamed: attack players who come too close (range enforced by follow-range attr)
         Predicate<LivingEntity> untamedPred = e -> !this.isTamed();
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, PlayerEntity.class, 1, false, false, untamedPred));
+        this.targetSelector.add(3, new ActiveTargetGoal<PlayerEntity>(this, PlayerEntity.class, 1, false, false, untamedPred));
     }
 
     @Override

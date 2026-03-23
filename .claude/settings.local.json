@@ -3,5 +3,20 @@
     "allow": [
       "Bash(gh auth:*)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "file=$(jq -r '.tool_input.file_path // .tool_response.filePath // empty' 2>/dev/null); if [[ \"$file\" == *.java ]]; then out=$(cd /home/user/mindcraft-mod/java-edition && ./gradlew compileJava --quiet --daemon 2>&1); rc=$?; if [ $rc -ne 0 ]; then if echo \"$out\" | grep -q 'Plugin.*was not found\\|Could not resolve\\|Connection refused'; then echo \"[compile-check] Gradle unavailable (network); skipping.\"; else echo \"[compile-check] ERRORS:\"; echo \"$out\" | grep -E 'error:|warning:|.java:[0-9]+' | head -20; fi; else echo \"[compile-check] OK\"; fi; fi",
+            "timeout": 120,
+            "statusMessage": "Compiling Java..."
+          }
+        ]
+      }
+    ]
   }
 }
