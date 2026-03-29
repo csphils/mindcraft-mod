@@ -6,9 +6,9 @@
     " S "
   ],
   "key": {
-    "I": { "item": "minecraft:iron_ingot" },
-    "S": { "item": "minecraft:stick" },
-    "P": { "item": "minecraft:glass_pane" }
+    "I": "minecraft:iron_ingot",
+    "S": "minecraft:stick",
+    "P": "minecraft:glass_pane"
   },
   "result": {
     "id": "mindcraftmod:bolt_action_rifle",

@@ -1,6 +1,22 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/block",
   "textures": {
-    "all": "mindcraftmod:block/barbed_wire_post"
-  }
+    "post": "mindcraftmod:block/barbed_wire_post",
+    "particle": "mindcraftmod:block/barbed_wire_post"
+  },
+  "elements": [
+    {
+      "comment": "Thin 2x16x2 iron post, centred in the block",
+      "from": [7, 0, 7],
+      "to": [9, 16, 9],
+      "faces": {
+        "north": { "texture": "#post", "uv": [7, 0, 9, 16] },
+        "south": { "texture": "#post", "uv": [7, 0, 9, 16] },
+        "east":  { "texture": "#post", "uv": [7, 0, 9, 16] },
+        "west":  { "texture": "#post", "uv": [7, 0, 9, 16] },
+        "up":    { "texture": "#post", "uv": [7, 7, 9, 9] },
+        "down":  { "texture": "#post", "uv": [7, 7, 9, 9] }
+      }
+    }
+  ]
 }

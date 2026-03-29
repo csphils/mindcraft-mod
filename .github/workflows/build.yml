@@ -20,6 +20,13 @@ jobs:
           java-version: "21"
           distribution: "temurin"
 
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: gradle-${{ hashFiles('java-edition/gradle.properties') }}
+          restore-keys: gradle-
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
@@ -33,3 +40,124 @@ jobs:
           name: mindcraftmod
           path: java-edition/build/libs/mindcraftmod-*.jar
           if-no-files-found: error
+
+  gametest:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: gradle-${{ hashFiles('java-edition/gradle.properties') }}
+          restore-keys: gradle-
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Install Xvfb
+        run: sudo apt-get install -y xvfb
+
+      - name: Run GameTests
+        working-directory: java-edition
+        run: xvfb-run -a gradle runGametest
+
+      - name: Upload GameTest log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gametest-log
+          path: java-edition/run/logs/latest.log
+          if-no-files-found: warn
+
+  client-gametest:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/caches
+          key: gradle-${{ hashFiles('java-edition/gradle.properties') }}
+          restore-keys: gradle-
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Install Xvfb and Mesa software renderer
+        run: sudo apt-get install -y xvfb libgl1-mesa-dri mesa-utils
+
+      - name: Run Client GameTests
+        working-directory: java-edition
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+        run: xvfb-run -a -s "-screen 0 1280x720x24" gradle runClientGametest
+
+      - name: Check for missing texture warnings
+        if: always()
+        run: |
+          LOG=java-edition/run/logs/latest.log
+          if [ -f "$LOG" ] && grep -qi "missing textures in model\|using missing texture\|failed to load texture" "$LOG"; then
+            echo "FAIL: Missing texture warnings detected:"
+            grep -i "missing textures in model\|using missing texture\|failed to load texture" "$LOG"
+            exit 1
+          fi
+          echo "OK: No missing texture warnings"
+
+      - name: Install Pillow for screenshot analysis
+        run: pip install --quiet Pillow
+
+      - name: Check screenshots for magenta missing-texture pixels
+        if: always()
+        run: |
+          python3 << 'EOF'
+          from PIL import Image
+          import pathlib, sys
+
+          screenshots_dir = pathlib.Path("java-edition/run/screenshots")
+          if not screenshots_dir.exists():
+              print("No screenshots directory — skipping check")
+              sys.exit(0)
+          failed = False
+          for img_path in sorted(screenshots_dir.glob("*.png")):
+              img = Image.open(img_path).convert("RGB")
+              pixels = list(img.getdata())
+              magenta = sum(1 for r, g, b in pixels if r > 200 and g < 50 and b > 200)
+              if magenta > 0:
+                  pct = magenta / len(pixels) * 100
+                  print(f"FAIL {img_path.name}: {magenta} magenta pixels ({pct:.1f}%) — missing texture detected")
+                  failed = True
+              else:
+                  print(f"OK   {img_path.name}: no magenta pixels ({len(pixels)} checked)")
+          sys.exit(1 if failed else 0)
+          EOF
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-screenshots
+          path: java-edition/run/screenshots/
+          if-no-files-found: warn

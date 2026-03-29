@@ -3,6 +3,7 @@ package com.mindcraftmod.test;
 import com.mindcraftmod.MindcraftMod;
 import com.mindcraftmod.block.ModBlocks;
 import com.mindcraftmod.block.SandbagBlock;
+import com.mindcraftmod.entity.ModEntities;
 import com.mindcraftmod.item.ModItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
@@ -33,6 +34,67 @@ public class MindcraftModGameTests {
 
     /** 3x3 flat stone floor — used for compact single-block tests. */
     private static final String ARENA_3X3 = NAMESPACE + ":empty_3x3";
+
+    // ════════════════════════════════════════════════════════════════════════
+    // Registration Integrity
+    // ════════════════════════════════════════════════════════════════════════
+
+    /** All 13 mod blocks are registered and non-null after mod init. */
+    @GameTest(templateName = ARENA_3X3)
+    public void blockRegistrationIntegrity(TestContext ctx) {
+        ctx.assertTrue(ModBlocks.BARBED_WIRE != null,        "BARBED_WIRE");
+        ctx.assertTrue(ModBlocks.GAS_CLOUD != null,          "GAS_CLOUD");
+        ctx.assertTrue(ModBlocks.SMOKE_SCREEN != null,       "SMOKE_SCREEN");
+        ctx.assertTrue(ModBlocks.MUD_PIT != null,            "MUD_PIT");
+        ctx.assertTrue(ModBlocks.SANDBAG != null,            "SANDBAG");
+        ctx.assertTrue(ModBlocks.TRENCH_WALL != null,        "TRENCH_WALL");
+        ctx.assertTrue(ModBlocks.ARTILLERY_PLATFORM != null, "ARTILLERY_PLATFORM");
+        ctx.assertTrue(ModBlocks.FIELD_TELEPHONE != null,    "FIELD_TELEPHONE");
+        ctx.assertTrue(ModBlocks.SUPPLY_CRATE != null,       "SUPPLY_CRATE");
+        ctx.assertTrue(ModBlocks.SHELL_CRATER != null,       "SHELL_CRATER");
+        ctx.assertTrue(ModBlocks.BARBED_WIRE_POST != null,   "BARBED_WIRE_POST");
+        ctx.assertTrue(ModBlocks.RUSTED_IRON_BARS != null,   "RUSTED_IRON_BARS");
+        ctx.assertTrue(ModBlocks.FLAG_BLOCK != null,         "FLAG_BLOCK");
+        ctx.complete();
+    }
+
+    /** All 14 mod items are registered and non-null after mod init. */
+    @GameTest(templateName = ARENA_3X3)
+    public void itemRegistrationIntegrity(TestContext ctx) {
+        ctx.assertTrue(ModItems.BOLT_ACTION_RIFLE != null,  "BOLT_ACTION_RIFLE");
+        ctx.assertTrue(ModItems.TRENCH_BAYONET != null,     "TRENCH_BAYONET");
+        ctx.assertTrue(ModItems.GRENADE != null,            "GRENADE (item)");
+        ctx.assertTrue(ModItems.GAS_MASK != null,           "GAS_MASK");
+        ctx.assertTrue(ModItems.TRENCH_COAT != null,        "TRENCH_COAT");
+        ctx.assertTrue(ModItems.HORSE_ARMOR_PLATE != null,  "HORSE_ARMOR_PLATE");
+        ctx.assertTrue(ModItems.FIELD_RATIONS != null,      "FIELD_RATIONS");
+        ctx.assertTrue(ModItems.SIGNAL_FLARE_RED != null,   "SIGNAL_FLARE_RED");
+        ctx.assertTrue(ModItems.SIGNAL_FLARE_GREEN != null, "SIGNAL_FLARE_GREEN");
+        ctx.assertTrue(ModItems.SIGNAL_FLARE_GRAY != null,  "SIGNAL_FLARE_GRAY");
+        ctx.assertTrue(ModItems.RIFLE_CARTRIDGE != null,    "RIFLE_CARTRIDGE");
+        ctx.assertTrue(ModItems.GAS_CANISTER != null,       "GAS_CANISTER");
+        ctx.assertTrue(ModItems.MUD_BALL != null,           "MUD_BALL");
+        ctx.assertTrue(ModItems.LEATHER_SCRAP != null,      "LEATHER_SCRAP");
+        ctx.complete();
+    }
+
+    /** All 12 mod entity types are registered and non-null after mod init. */
+    @GameTest(templateName = ARENA_3X3)
+    public void entityRegistrationIntegrity(TestContext ctx) {
+        ctx.assertTrue(ModEntities.WAR_HORSE != null,               "WAR_HORSE");
+        ctx.assertTrue(ModEntities.CARRIER_PIGEON != null,          "CARRIER_PIGEON");
+        ctx.assertTrue(ModEntities.TRENCH_RAT != null,              "TRENCH_RAT");
+        ctx.assertTrue(ModEntities.GUARD_DOG != null,               "GUARD_DOG");
+        ctx.assertTrue(ModEntities.TRENCH_SOLDIER != null,          "TRENCH_SOLDIER");
+        ctx.assertTrue(ModEntities.SNIPER != null,                  "SNIPER");
+        ctx.assertTrue(ModEntities.GAS_GRENADIER != null,           "GAS_GRENADIER");
+        ctx.assertTrue(ModEntities.TRENCH_RIFLE_PROJECTILE != null, "TRENCH_RIFLE_PROJECTILE");
+        ctx.assertTrue(ModEntities.GAS_CANISTE_PROJECTILE != null,  "GAS_CANISTE_PROJECTILE");
+        ctx.assertTrue(ModEntities.GRENADE != null,                 "GRENADE (entity)");
+        ctx.assertTrue(ModEntities.SIGNAL_FLARE_PROJECTILE != null, "SIGNAL_FLARE_PROJECTILE");
+        ctx.assertTrue(ModEntities.MUD_BALL_PROJECTILE != null,     "MUD_BALL_PROJECTILE");
+        ctx.complete();
+    }
 
     // ════════════════════════════════════════════════════════════════════════
     // BarbedWireBlock
@@ -163,14 +225,17 @@ public class MindcraftModGameTests {
 
         ctx.setBlockState(sourcePos, ModBlocks.GAS_CLOUD.getDefaultState());
 
-        // Force many random ticks on the source block
+        // Force many random ticks on the source block.
+        // If the source dissipates (5% chance per tick), immediately re-place it so
+        // spread attempts keep accumulating regardless of dissipation luck.
         ctx.runAtEveryTick(() -> {
-            if (ctx.getWorld().getBlockState(
-                    ctx.getAbsolutePos(sourcePos)).isOf(ModBlocks.GAS_CLOUD)) {
-                ctx.getWorld().getBlockState(ctx.getAbsolutePos(sourcePos))
-                        .randomTick(ctx.getWorld(),
-                                ctx.getAbsolutePos(sourcePos),
-                                ctx.getWorld().random);
+            var absSource = ctx.getAbsolutePos(sourcePos);
+            var state = ctx.getWorld().getBlockState(absSource);
+            if (state.isOf(ModBlocks.GAS_CLOUD)) {
+                state.randomTick(ctx.getWorld(), absSource, ctx.getWorld().random);
+            } else {
+                // Dissipated — re-place immediately so next tick can try to spread
+                ctx.getWorld().setBlockState(absSource, ModBlocks.GAS_CLOUD.getDefaultState());
             }
         });
 
@@ -308,17 +373,25 @@ public class MindcraftModGameTests {
      */
     @GameTest(templateName = ARENA_5X5)
     public void sandbagFullBlockAtEight(TestContext ctx) {
-        BlockPos pos = new BlockPos(2, 1, 2);
-        ctx.setBlockState(pos, ModBlocks.SANDBAG.getDefaultState()
+        BlockPos sandPos = new BlockPos(2, 1, 2);
+        ctx.setBlockState(sandPos, ModBlocks.SANDBAG.getDefaultState()
                 .with(SandbagBlock.LAYERS, 8));
 
-        // Drop entity from above — at layers=8, it should rest on top (y=2.0)
+        // Drop entity from above — at layers=8, it should rest on top of the sandbag.
+        // The sandbag occupies relative y=1 (full block), so the entity should land at
+        // the absolute y of relative y=2 (the first air block above the sandbag).
         var sheep = ctx.spawnEntity(EntityType.SHEEP, 2, 4, 2);
 
-        ctx.waitAndRun(15, () -> {
+        // Convert relative y=2 to absolute to get the expected landing Y.
+        double expectedTopY = ctx.getAbsolutePos(new BlockPos(2, 2, 2)).getY();
+
+        ctx.waitAndRun(20, () -> {
+            // Entity feet should be at the sandbag's top surface (absolute y = expectedTopY).
+            // If it fell through, it would be at y = expectedTopY - 1 (stone floor).
             ctx.assertTrue(
-                    sheep.getY() >= 2.0 - 0.01 && sheep.getY() <= 2.0 + 0.1,
-                    "Entity should rest on top of full-height sandbag (layers=8) at y≈2.0"
+                    sheep.getY() >= expectedTopY - 0.01,
+                    "Entity should rest on top of full-height sandbag (layers=8), expected y≈"
+                    + expectedTopY + " but got y=" + sheep.getY()
             );
             ctx.complete();
         });

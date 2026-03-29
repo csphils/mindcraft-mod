@@ -4,9 +4,9 @@
     "BGY"
   ],
   "key": {
-    "B": { "item": "minecraft:glass_bottle" },
-    "G": { "item": "minecraft:gunpowder" },
-    "Y": { "item": "minecraft:yellow_dye" }
+    "B": "minecraft:glass_bottle",
+    "G": "minecraft:gunpowder",
+    "Y": "minecraft:yellow_dye"
   },
   "result": {
     "id": "mindcraftmod:gas_canister",

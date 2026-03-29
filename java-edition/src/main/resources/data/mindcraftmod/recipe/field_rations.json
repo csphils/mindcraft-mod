@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    { "item": "minecraft:wheat" },
-    { "item": "minecraft:cooked_beef" },
-    { "item": "minecraft:bowl" }
+    "minecraft:wheat",
+    "minecraft:cooked_beef",
+    "minecraft:bowl"
   ],
   "result": {
     "id": "mindcraftmod:field_rations",

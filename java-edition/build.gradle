@@ -1,5 +1,5 @@
 plugins {
-    id "fabric-loom" version "1.8.9"
+    id "fabric-loom" version "1.8.13"
     id "maven-publish"
 }
 
@@ -12,6 +12,32 @@ base {
 
 repositories {
     // Add mod dependencies here as needed
+}
+
+loom {
+    runs {
+        // Headless server that runs all @GameTest methods and exits.
+        // Triggered by fabric-api.gametest system property.
+        // Run with: ./gradlew runGametest
+        gametest {
+            server()
+            name "Game Test Server"
+            vmArg "-ea"
+            property "fabric-api.gametest", "1"
+            property "fabric-api.gametest.report-file",
+                    project.file("run/gametest-report.xml").absolutePath
+        }
+
+        // Headless client that runs FabricClientGameTest entrypoints and exits.
+        // Requires a virtual display (Xvfb) on Linux.
+        // Run with: ./gradlew runClientGametest
+        clientGametest {
+            client()
+            name "Client Game Test"
+            vmArg "-ea"
+            property "fabric.client.gametest", "1"
+        }
+    }
 }
 
 dependencies {

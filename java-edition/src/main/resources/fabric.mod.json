@@ -14,7 +14,14 @@
   "entrypoints": {
     "main": ["com.mindcraftmod.MindcraftMod"],
     "client": ["com.mindcraftmod.client.MindcraftModClient"],
-    "fabric-gametest": ["com.mindcraftmod.test.MindcraftModGameTests"]
+    "fabric-gametest": [
+      "com.mindcraftmod.test.MindcraftModGameTests",
+      "com.mindcraftmod.test.ItemGameTests",
+      "com.mindcraftmod.test.EntityGameTests"
+    ],
+    "fabric-client-gametest": [
+      "com.mindcraftmod.test.MindcraftModClientGameTests"
+    ]
   },
   "mixins": ["mindcraftmod.mixins.json"],
   "depends": {

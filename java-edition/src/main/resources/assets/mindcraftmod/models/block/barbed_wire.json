@@ -1,6 +1,35 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/block",
   "textures": {
-    "all": "mindcraftmod:block/barbed_wire"
-  }
+    "wire": "mindcraftmod:block/barbed_wire",
+    "particle": "mindcraftmod:block/barbed_wire"
+  },
+  "elements": [
+    {
+      "comment": "E-W strand — lies flat on the ground",
+      "from": [0, 0, 6],
+      "to": [16, 1, 10],
+      "faces": {
+        "up":    { "texture": "#wire", "uv": [0, 6, 16, 10] },
+        "down":  { "texture": "#wire", "uv": [0, 6, 16, 10] },
+        "north": { "texture": "#wire", "uv": [0, 15, 16, 16] },
+        "south": { "texture": "#wire", "uv": [0, 15, 16, 16] },
+        "east":  { "texture": "#wire", "uv": [6, 15, 10, 16] },
+        "west":  { "texture": "#wire", "uv": [6, 15, 10, 16] }
+      }
+    },
+    {
+      "comment": "N-S strand — 1 unit above E-W strand",
+      "from": [6, 1, 0],
+      "to": [10, 2, 16],
+      "faces": {
+        "up":    { "texture": "#wire", "uv": [6, 0, 10, 16] },
+        "down":  { "texture": "#wire", "uv": [6, 0, 10, 16] },
+        "north": { "texture": "#wire", "uv": [6, 14, 10, 15] },
+        "south": { "texture": "#wire", "uv": [6, 14, 10, 15] },
+        "east":  { "texture": "#wire", "uv": [0, 14, 16, 15] },
+        "west":  { "texture": "#wire", "uv": [0, 14, 16, 15] }
+      }
+    }
+  ]
 }

@@ -6,8 +6,8 @@
     "I"
   ],
   "key": {
-    "I": { "item": "minecraft:iron_ingot" },
-    "G": { "item": "minecraft:gunpowder" }
+    "I": "minecraft:iron_ingot",
+    "G": "minecraft:gunpowder"
   },
   "result": {
     "id": "mindcraftmod:grenade",

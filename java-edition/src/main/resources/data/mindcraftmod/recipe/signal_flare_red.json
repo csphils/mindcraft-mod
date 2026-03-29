@@ -6,9 +6,9 @@
     "I"
   ],
   "key": {
-    "G": { "item": "minecraft:gunpowder" },
-    "D": { "item": "minecraft:red_dye" },
-    "I": { "item": "minecraft:iron_ingot" }
+    "G": "minecraft:gunpowder",
+    "D": "minecraft:red_dye",
+    "I": "minecraft:iron_ingot"
   },
   "result": {
     "id": "mindcraftmod:signal_flare_red",

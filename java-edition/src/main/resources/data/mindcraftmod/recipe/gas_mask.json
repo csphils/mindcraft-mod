@@ -5,9 +5,9 @@
     "S S"
   ],
   "key": {
-    "I": { "item": "minecraft:iron_ingot" },
-    "G": { "item": "minecraft:glass_pane" },
-    "S": { "item": "minecraft:string" }
+    "I": "minecraft:iron_ingot",
+    "G": "minecraft:glass_pane",
+    "S": "minecraft:string"
   },
   "result": {
     "id": "mindcraftmod:gas_mask",

@@ -19,9 +19,17 @@
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": { "min": 8, "max": 16 }
+              "count": {
+                "min": 8,
+                "max": 16
+              }
             },
-            { "function": "minecraft:looting_enchant", "count": { "min": 0, "max": 4 } }
+            {
+              "function": "minecraft:enchanted_count_increase",
+              "enchantment": "minecraft:looting",
+              "count": 1,
+              "limit": 4
+            }
           ]
         }
       ]

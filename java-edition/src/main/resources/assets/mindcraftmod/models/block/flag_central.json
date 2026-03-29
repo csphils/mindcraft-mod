@@ -1,6 +1,32 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/block",
   "textures": {
-    "cross": "mindcraftmod:block/flag_central"
-  }
+    "pole": "mindcraftmod:block/barbed_wire_post",
+    "flag": "mindcraftmod:block/flag_central",
+    "particle": "mindcraftmod:block/flag_central"
+  },
+  "elements": [
+    {
+      "comment": "Flag pole — thin 2x16x2 pillar",
+      "from": [7, 0, 7],
+      "to": [9, 16, 9],
+      "faces": {
+        "north": { "texture": "#pole", "uv": [7, 0, 9, 16] },
+        "south": { "texture": "#pole", "uv": [7, 0, 9, 16] },
+        "east":  { "texture": "#pole", "uv": [7, 0, 9, 16] },
+        "west":  { "texture": "#pole", "uv": [7, 0, 9, 16] },
+        "up":    { "texture": "#pole", "uv": [7, 7, 9, 9] },
+        "down":  { "texture": "#pole", "uv": [7, 7, 9, 9] }
+      }
+    },
+    {
+      "comment": "Flag panel — Iron Cross (Central Powers)",
+      "from": [9, 9, 7],
+      "to": [15, 15, 8],
+      "faces": {
+        "north": { "texture": "#flag", "uv": [0, 0, 16, 16] },
+        "south": { "texture": "#flag", "uv": [0, 0, 16, 16] }
+      }
+    }
+  ]
 }
