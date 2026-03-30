@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "mindcraftmod:block/grave_marker",
+    "texture":  "mindcraftmod:block/grave_marker"
+  },
+  "elements": [
+    {
+      "comment": "vertical shaft",
+      "from": [6, 0, 6],
+      "to":   [10, 16, 10],
+      "faces": {
+        "north": { "uv": [6,  0, 10, 16], "texture": "#texture" },
+        "south": { "uv": [6,  0, 10, 16], "texture": "#texture" },
+        "east":  { "uv": [6,  0, 10, 16], "texture": "#texture" },
+        "west":  { "uv": [6,  0, 10, 16], "texture": "#texture" },
+        "up":    { "uv": [6,  6, 10, 10], "texture": "#texture" },
+        "down":  { "uv": [6,  6, 10, 10], "texture": "#texture" }
+      }
+    },
+    {
+      "comment": "crossbar",
+      "from": [3, 8, 6],
+      "to":   [13, 12, 10],
+      "faces": {
+        "north": { "uv": [3,  8, 13, 12], "texture": "#texture" },
+        "south": { "uv": [3,  8, 13, 12], "texture": "#texture" },
+        "east":  { "uv": [0,  8,  4, 12], "texture": "#texture" },
+        "west":  { "uv": [0,  8,  4, 12], "texture": "#texture" },
+        "up":    { "uv": [3,  6, 13, 10], "texture": "#texture" },
+        "down":  { "uv": [3,  6, 13, 10], "texture": "#texture" }
+      }
+    }
+  ]
+}

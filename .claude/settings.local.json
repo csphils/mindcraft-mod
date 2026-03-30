@@ -74,7 +74,12 @@
       "WebFetch(domain:www.modpackindex.com)",
       "WebFetch(domain:ladysnake.org)",
       "WebFetch(domain:mcmodhelp.fandom.com)",
-      "Bash(python scripts/generate_textures.py)"
+      "Bash(python scripts/generate_textures.py)",
+      "Bash(find /c/Users/phil/code/mindcraft-mod/java-edition/src/main/resources/data/mindcraftmod/gametest/structures -name *.snbt)",
+      "Bash(find /c/Users/phil/code/mindcraft-mod/java-edition/src/main/resources/data -name *.nbt -o -name *.snbt)",
+      "Bash(ls:*)",
+      "Bash(./gradlew compileTestJava --no-daemon -q)",
+      "Bash(./gradlew compileJava compileTestJava --no-daemon --continue -q)"
     ]
   },
   "hooks": {
@@ -84,9 +89,42 @@
         "hooks": [
           {
             "type": "command",
-            "command": "file=$(jq -r '.tool_input.file_path // .tool_response.filePath // empty' 2>/dev/null); if [[ \"$file\" == *.java ]]; then out=$(cd /home/user/mindcraft-mod/java-edition && ./gradlew compileJava --quiet --daemon 2>&1); rc=$?; if [ $rc -ne 0 ]; then if echo \"$out\" | grep -q 'Plugin.*was not found\\|Could not resolve\\|Connection refused'; then echo \"[compile-check] Gradle unavailable (network); skipping.\"; else echo \"[compile-check] ERRORS:\"; echo \"$out\" | grep -E 'error:|warning:|.java:[0-9]+' | head -20; fi; else echo \"[compile-check] OK\"; fi; fi",
+            "command": "file=$(jq -r '.tool_input.file_path // .tool_response.filePath // empty' 2>/dev/null); if [[ \"$file\" == *.java ]]; then out=$(cd /c/Users/phil/code/mindcraft-mod/java-edition && ./gradlew compileJava --quiet --daemon 2>&1); rc=$?; if [ $rc -ne 0 ]; then if echo \"$out\" | grep -q 'Plugin.*was not found\\|Could not resolve\\|Connection refused'; then echo \"[compile-check] Gradle unavailable (network); skipping.\"; else echo \"[compile-check] ERRORS:\"; echo \"$out\" | grep -E 'error:|warning:|.java:[0-9]+' | head -20; fi; else echo \"[compile-check] OK\"; fi; fi",
             "timeout": 120,
             "statusMessage": "Compiling Java..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "Run: cd /c/Users/phil/code/mindcraft-mod/java-edition && ./gradlew test --no-daemon -q 2>&1\n\nIf any tests fail, report each failing test name and the failure message, then exit with code 2 to block completion.\nIf all tests pass (or there are no tests to run), allow the stop.",
+            "timeout": 300
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '=== PROJECT CONTEXT ===' && cat /c/Users/phil/code/mindcraft-mod/.claude/context-summary.md 2>/dev/null || echo '[context-summary.md not found]'",
+            "statusMessage": "Injecting project context..."
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '=== CONTEXT COMPACTED — PROJECT STATE REFRESHED ===' && cat /c/Users/phil/code/mindcraft-mod/.claude/context-summary.md 2>/dev/null || echo '[context-summary.md not found]'",
+            "statusMessage": "Refreshing project context..."
           }
         ]
       }

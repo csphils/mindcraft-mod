@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PDP",
+    "PPP"
+  ],
+  "key": {
+    "P": "minecraft:paper",
+    "D": "minecraft:ink_sac"
+  },
+  "result": {
+    "id": "mindcraftmod:war_poster",
+    "count": 1
+  }
+}

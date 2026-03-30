@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north,variant=recruitment": { "model": "mindcraftmod:block/war_poster_recruitment" },
+    "facing=north,variant=propaganda":  { "model": "mindcraftmod:block/war_poster_propaganda"  },
+    "facing=north,variant=victory":     { "model": "mindcraftmod:block/war_poster_victory"     },
+    "facing=north,variant=warning":     { "model": "mindcraftmod:block/war_poster_warning"     },
+    "facing=south,variant=recruitment": { "model": "mindcraftmod:block/war_poster_recruitment", "y": 180 },
+    "facing=south,variant=propaganda":  { "model": "mindcraftmod:block/war_poster_propaganda",  "y": 180 },
+    "facing=south,variant=victory":     { "model": "mindcraftmod:block/war_poster_victory",     "y": 180 },
+    "facing=south,variant=warning":     { "model": "mindcraftmod:block/war_poster_warning",     "y": 180 },
+    "facing=east,variant=recruitment":  { "model": "mindcraftmod:block/war_poster_recruitment", "y": 90  },
+    "facing=east,variant=propaganda":   { "model": "mindcraftmod:block/war_poster_propaganda",  "y": 90  },
+    "facing=east,variant=victory":      { "model": "mindcraftmod:block/war_poster_victory",     "y": 90  },
+    "facing=east,variant=warning":      { "model": "mindcraftmod:block/war_poster_warning",     "y": 90  },
+    "facing=west,variant=recruitment":  { "model": "mindcraftmod:block/war_poster_recruitment", "y": 270 },
+    "facing=west,variant=propaganda":   { "model": "mindcraftmod:block/war_poster_propaganda",  "y": 270 },
+    "facing=west,variant=victory":      { "model": "mindcraftmod:block/war_poster_victory",     "y": 270 },
+    "facing=west,variant=warning":      { "model": "mindcraftmod:block/war_poster_warning",     "y": 270 }
+  }
+}

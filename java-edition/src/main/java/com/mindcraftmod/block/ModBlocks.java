@@ -121,11 +121,27 @@ public class ModBlocks {
                     .strength(1.0f)
             ));
 
-    public static final Block RUSTED_IRON_BARS = new Block(
+    public static final Block RUSTED_IRON_BARS = new RustedIronBarsBlock(
             key("rusted_iron_bars", AbstractBlock.Settings.create()
                     .mapColor(MapColor.IRON_GRAY)
                     .sounds(BlockSoundGroup.METAL)
                     .strength(1.5f, 6.0f)
+                    .nonOpaque()
+            ));
+
+    public static final Block WAR_POSTER = new WarPosterBlock(
+            key("war_poster", AbstractBlock.Settings.create()
+                    .mapColor(MapColor.PALE_YELLOW)
+                    .sounds(BlockSoundGroup.WOOD)
+                    .strength(0.5f)
+                    .nonOpaque()
+            ));
+
+    public static final Block GRAVE_MARKER = new GraveMarkerBlock(
+            key("grave_marker", AbstractBlock.Settings.create()
+                    .mapColor(MapColor.WHITE_GRAY)
+                    .sounds(BlockSoundGroup.WOOD)
+                    .strength(1.0f)
                     .nonOpaque()
             ));
 
@@ -152,6 +168,8 @@ public class ModBlocks {
         registerBlock("shell_crater",       SHELL_CRATER);
         registerBlock("barbed_wire_post",   BARBED_WIRE_POST);
         registerBlock("rusted_iron_bars",   RUSTED_IRON_BARS);
+        registerBlock("war_poster",         WAR_POSTER);
+        registerBlock("grave_marker",       GRAVE_MARKER);
         registerBlock("flag_block",         FLAG_BLOCK);
 
         MindcraftMod.LOGGER.info("Blocks registered.");

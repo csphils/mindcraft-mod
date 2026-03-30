@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "mindcraftmod:block/grave_marker" },
+    "facing=south": { "model": "mindcraftmod:block/grave_marker", "y": 180 },
+    "facing=east":  { "model": "mindcraftmod:block/grave_marker", "y": 90  },
+    "facing=west":  { "model": "mindcraftmod:block/grave_marker", "y": 270 }
+  }
+}

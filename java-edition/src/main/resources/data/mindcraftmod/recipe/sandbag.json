@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "STS",
+    "SSS"
+  ],
+  "key": {
+    "S": "minecraft:sand",
+    "T": "minecraft:string"
+  },
+  "result": {
+    "id": "mindcraftmod:sandbag",
+    "count": 2
+  }
+}

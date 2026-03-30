@@ -1,16 +1,20 @@
 package com.mindcraftmod.test;
 
 import com.mindcraftmod.MindcraftMod;
+import com.mindcraftmod.block.FlagBlock;
 import com.mindcraftmod.block.ModBlocks;
 import com.mindcraftmod.block.SandbagBlock;
 import com.mindcraftmod.entity.ModEntities;
 import com.mindcraftmod.item.ModItems;
+import com.mindcraftmod.world.FactionManager;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.test.GameTest;
 import net.minecraft.test.TestContext;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 
 /**
  * Fabric GameTest suite — in-game automated tests for block behaviors.
@@ -39,7 +43,7 @@ public class MindcraftModGameTests {
     // Registration Integrity
     // ════════════════════════════════════════════════════════════════════════
 
-    /** All 13 mod blocks are registered and non-null after mod init. */
+    /** All 15 mod blocks are registered and non-null after mod init. */
     @GameTest(templateName = ARENA_3X3)
     public void blockRegistrationIntegrity(TestContext ctx) {
         ctx.assertTrue(ModBlocks.BARBED_WIRE != null,        "BARBED_WIRE");
@@ -55,6 +59,9 @@ public class MindcraftModGameTests {
         ctx.assertTrue(ModBlocks.BARBED_WIRE_POST != null,   "BARBED_WIRE_POST");
         ctx.assertTrue(ModBlocks.RUSTED_IRON_BARS != null,   "RUSTED_IRON_BARS");
         ctx.assertTrue(ModBlocks.FLAG_BLOCK != null,         "FLAG_BLOCK");
+        // Phase 2 additions
+        ctx.assertTrue(ModBlocks.WAR_POSTER != null,         "WAR_POSTER");
+        ctx.assertTrue(ModBlocks.GRAVE_MARKER != null,       "GRAVE_MARKER");
         ctx.complete();
     }
 
@@ -468,6 +475,95 @@ public class MindcraftModGameTests {
                         "Breaking a filled supply crate should drop item entities");
                 ctx.complete();
             });
+        });
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // FlagBlock — coverage gap tests (Phase 2)
+    // ════════════════════════════════════════════════════════════════════════
+
+    /**
+     * FlagBlock.capture() called with Faction.ALLIES changes the block state
+     * FACTION property from NEUTRAL to ALLIED.
+     */
+    @GameTest(templateName = ARENA_3X3)
+    public void flagBlock_captureChangesStateToAllied(TestContext ctx) {
+        BlockPos pos = new BlockPos(1, 1, 1);
+        ctx.setBlockState(pos, ModBlocks.FLAG_BLOCK.getDefaultState()
+                .with(FlagBlock.FACTION, FlagBlock.FlagFaction.NEUTRAL));
+
+        ctx.waitAndRun(1, () -> {
+            FlagBlock.capture(ctx.getWorld(), ctx.getAbsolutePos(pos),
+                    FactionManager.Faction.ALLIES);
+
+            ctx.waitAndRun(1, () -> {
+                var faction = ctx.getBlockState(pos).get(FlagBlock.FACTION);
+                ctx.assertTrue(
+                        faction == FlagBlock.FlagFaction.ALLIED,
+                        "Flag FACTION should be ALLIED after capture by ALLIES, got: " + faction
+                );
+                ctx.complete();
+            });
+        });
+    }
+
+    /**
+     * FlagBlock.capture() called with Faction.CENTRAL_POWERS changes the block
+     * state FACTION property from NEUTRAL to CENTRAL.
+     */
+    @GameTest(templateName = ARENA_3X3)
+    public void flagBlock_captureChangesStateToCentral(TestContext ctx) {
+        BlockPos pos = new BlockPos(1, 1, 1);
+        ctx.setBlockState(pos, ModBlocks.FLAG_BLOCK.getDefaultState()
+                .with(FlagBlock.FACTION, FlagBlock.FlagFaction.NEUTRAL));
+
+        ctx.waitAndRun(1, () -> {
+            FlagBlock.capture(ctx.getWorld(), ctx.getAbsolutePos(pos),
+                    FactionManager.Faction.CENTRAL_POWERS);
+
+            ctx.waitAndRun(1, () -> {
+                var faction = ctx.getBlockState(pos).get(FlagBlock.FACTION);
+                ctx.assertTrue(
+                        faction == FlagBlock.FlagFaction.CENTRAL,
+                        "Flag FACTION should be CENTRAL after capture by CENTRAL_POWERS, got: " + faction
+                );
+                ctx.complete();
+            });
+        });
+    }
+
+    // ════════════════════════════════════════════════════════════════════════
+    // MudPitBlock — coverage gap test (Phase 2)
+    // ════════════════════════════════════════════════════════════════════════
+
+    /**
+     * MudPitBlock.onSteppedOn() caps upward velocity to 0.1.
+     *
+     * Calls onSteppedOn() directly to avoid physics-timing issues: with vel.y=0.5
+     * the entity moves off the block in the same tick, so relying on natural tick
+     * order would never trigger the cap. Direct invocation tests the actual logic.
+     */
+    @GameTest(templateName = ARENA_3X3)
+    public void mudPit_capsJumpVelocity(TestContext ctx) {
+        BlockPos mudPos = new BlockPos(1, 1, 1);
+        ctx.setBlockState(mudPos, ModBlocks.MUD_PIT.getDefaultState());
+        var sheep = ctx.spawnEntity(EntityType.SHEEP, 1, 2, 1);
+
+        ctx.waitAndRun(2, () -> {
+            sheep.setVelocity(new Vec3d(0.0, 0.5, 0.0));
+
+            // Invoke onSteppedOn directly — tests the velocity-capping method
+            // without depending on entity physics ordering.
+            BlockPos absPos   = ctx.getAbsolutePos(mudPos);
+            BlockState mudState = ctx.getWorld().getBlockState(absPos);
+            mudState.getBlock().onSteppedOn(ctx.getWorld(), absPos, mudState, sheep);
+
+            double vy = sheep.getVelocity().y;
+            ctx.assertTrue(
+                    vy <= 0.1 + 0.001,
+                    "MudPitBlock.onSteppedOn() should cap upward velocity to ≤ 0.1, but was " + vy
+            );
+            ctx.complete();
         });
     }
 }

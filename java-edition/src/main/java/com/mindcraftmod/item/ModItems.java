@@ -105,6 +105,8 @@ public class ModItems {
         registerBlockItem("shell_crater",       ModBlocks.SHELL_CRATER);
         registerBlockItem("barbed_wire_post",   ModBlocks.BARBED_WIRE_POST);
         registerBlockItem("rusted_iron_bars",   ModBlocks.RUSTED_IRON_BARS);
+        registerBlockItem("war_poster",         ModBlocks.WAR_POSTER);
+        registerBlockItem("grave_marker",       ModBlocks.GRAVE_MARKER);
         registerBlockItem("flag_block",         ModBlocks.FLAG_BLOCK);
 
         MindcraftMod.LOGGER.info("Items registered.");
